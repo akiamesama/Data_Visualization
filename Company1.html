@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>ConnectWith</title>
+
+    <style>
+    svg{
+        float: left;
+    }
+    .node {
+      stroke: #fff;
+      stroke-width: 1.5px;
+    }
+
+    .link {
+      stroke: #999;
+      stroke-opacity: .6;
+    }
+    #rightOne, #rightTwo{
+      float: right;
+      text-align: center;
+      width: 230px;
+    }
+    </style>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/agency.css" rel="stylesheet">
+    <link href="css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body id="page-top" class="index">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="#page-top">ConnectWith</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a class="page-scroll" href="#overview">Clients Overview</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#dashboard">DashBoard</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#network">NetWork</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#chat">Chat</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#abnormity">Abnormity</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="intro-text">
+                <div class="intro-lead-in">Welcome To ConnectWith! </div>
+                <a href="#dashboard" class="page-scroll btn btn-xl">Go to my dashboard</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Dashboard Section -->
+    <section id="overview">
+        <div class="container">
+            <div class="row" style="text-align: center">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Clients Overview</h2>
+                    <h3 class="section-subheading text-muted"> </h3>
+                        <!-- Company 1 -->
+                        <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-globe fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="largeSize">Company 1</div>
+                                        <div></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a class="page-scroll" href="company1.html#dashboard">
+                                <div class="panel-footer" style="color:#337ab7">
+                                    <span class="pull-left"> View Detail </span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Chat -->
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-green">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-gamepad fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                       <div class="largeSize">Company 2</div>
+                                        <div></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a class="page-scroll" href="company1.html#dashboard">
+                                <div class="panel-footer">
+                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Abnormity -->
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-yellow">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-gittip fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="largeSize">Company 3</div>
+                                        <div></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a class="page-scroll" href="company1.html#dashboard">
+                                <div class="panel-footer">
+                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Contact -->
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-red">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-apple fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="largeSize">Company 4</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a class="page-scroll" href="company1.html#dashboard">
+                                <div class="panel-footer">
+                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+        
+
+    <!-- Dashboard Section -->
+    <section id="dashboard">
+        <div class="container">
+            <div class="row" style="text-align: center">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Dashboard - Company 1</h2>
+                </div>
+                    <div class="col-lg-12 text-center">
+                            <!-- Email -->
+                            <div class="col-lg-3 col-md-6">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <i class="fa fa-envelope-o fa-5x"></i>
+                                        </div>
+                                        <div class="col-xs-9 text-right">
+                                            <div class="huge">12345</div>
+                                            <div>Emails</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a class="page-scroll" href="#network">
+                                    <div class="panel-footer" style="color:#337ab7">
+                                        <span class="pull-left"> View Network </span>
+                                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <!-- Chat -->
+                        <div class="col-lg-3 col-md-6">
+                            <div class="panel panel-green">
+                                <div class="panel-heading">
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <i class="fa fa-comments fa-5x"></i>
+                                        </div>
+                                        <div class="col-xs-9 text-right">
+                                            <div class="huge">12345</div>
+                                            <div>Chats</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a class="page-scroll" href="#network">
+                                    <div class="panel-footer">
+                                        <span class="pull-left">View Details</span>
+                                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <!-- Abnormity -->
+                        <div class="col-lg-3 col-md-6">
+                            <div class="panel panel-yellow">
+                                <div class="panel-heading">
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <i class="fa fa-warning fa-5x"></i>
+                                        </div>
+                                        <div class="col-xs-9 text-right">
+                                            <div class="huge">18</div>
+                                            <div>abnormity found</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a class="page-scroll" href="#abnormity">
+                                    <div class="panel-footer">
+                                        <span class="pull-left">View Details</span>
+                                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <!-- OverView -->
+                        <div class="col-lg-3 col-md-6">
+                            <div class="panel panel-red">
+                                <div class="panel-heading">
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <i class="fa fa-support fa-5x"></i>
+                                        </div>
+                                        <div class="col-xs-9 text-right">
+                                            <div class="huge">Other</div>
+                                            <div>View other companies</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a class="page-scroll" href="#index">
+                                    <div class="panel-footer">
+                                        <span class="pull-left">Other companies</span>
+                                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                <div style="text-align:left; padding-bottom: 5px;">
+                  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    Choose Time Range
+                    <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <li><a href="#">last 5 days</a></li>
+                    <li><a href="#">last 7 days</a></li>
+                    <li><a href="#">last 1 months</a></li>
+                  </ul>
+                  <span> &nbsp; or Input a Time Range: </span>
+                  <input id="from" type="date" placeholder="From">
+                  <span> to </span>
+                  <input id="to" type="date" placeholder="To">
+                  <button type="button" class="btn btn-info">submit</button>
+                </div>
+                <div id="container1" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Network Grid Section -->
+    <section id="network" class="bg-light-gray">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Network</h2>
+                    <h3 class="section-subheading text-muted"> </h3>
+                </div>
+            </div>
+            <div class="col-lg-4" id="rightOne">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            Detail Information
+                        </div>
+                        <div class="panel-body" id="detail">
+                        </div>
+                        <div class="panel-footer" id="detailLink">
+                        </div>
+                    </div>
+                </div>
+            <div class="row text-center" id="svgplugin"></div>
+        </div>
+    </section>
+
+    <!-- Chat Section -->
+    <section id="chat" class="bg-light-gray">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Chat</h2>
+                    <h3 class="section-subheading text-muted"></h3>
+                </div>
+            </div>
+            <div class="col-lg-4" id="rightTwo">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            Detail Information
+                        </div>
+                        <div class="panel-body" id="detail2">
+                        </div>
+                        <div class="panel-footer" id="detailLink2">
+                        </div>
+                    </div>
+                </div>
+            <div class="row text-center" id="chatsvg"></div>
+        </div>
+    </section>
+
+    <!-- Abnormity Section -->
+    <section id="abnormity" class="bg-light-gray">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Abnormity Found</h2>
+                    <h3 class="section-subheading text-muted"> </h3>
+                </div>
+            </div>
+            <div class="row">
+               
+            </div>
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <p class="large text-muted"> </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <span class="copyright">Copyright &copy; ConnectWith 2015</span>
+                </div>
+                <div class="col-md-4">
+                    <ul class="list-inline quicklinks">
+                        <li><a href="#">Privacy Policy</a>
+                        </li>
+                        <li><a href="#">Terms of Use</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- Portfolio Modals -->
+    <!-- Use the modals below to showcase details about your portfolio projects! -->
+    <div class="detailMessage">
+        <div class="portfolio-modal modal fade" id="detailPage" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+            <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                    <div class="rl">
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <!-- Project Details Go Here -->
+                            <h2>Detail Information</h2>
+                            <p class="item-intro text-muted"></p>
+                            <p>Name: Name: Stella</p>
+                            <p>Team: Team 4</p>
+                            <p>Email Amount: 6</p>
+                            <p>Chat Amount: 14</p>
+                            <p>Top Three Contacts: </p>
+                            <ul class="list-inline">
+                                <li>Scarlett</li>
+                                <li>Keith</li>
+                                <li>Arthur</li>
+                                <li></li>
+                            </ul>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+        
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <script src="js/classie.js"></script>
+    <script src="js/cbpAnimatedHeader.js"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src="js/jqBootstrapValidation.js"></script>
+    <script src="js/contact_me.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="js/agency.js"></script>
+
+    <!-- d3.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+    <script src="js/visualization.js"></script>
+    <script src="js/chatVisualization.js"></script>
+
+    <!-- HighChart.js -->
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <script src="http://code.highcharts.com/modules/data.js"></script>
+    <script src="http://code.highcharts.com/modules/exporting.js"></script>
+    <script src="js/highchartIndex.js"></script>
+
+</body>
+
+</html>
