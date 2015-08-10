@@ -24,10 +24,13 @@
       stroke: #999;
       stroke-opacity: .6;
     }
-    #rightOne, #rightTwo{
+    #rightOne, #rightTwo, #rightThree{
       float: right;
       text-align: center;
       width: 230px;
+    }
+    #rightOne,#rightThree{
+        margin-top: 50px;
     }
     </style>
 
@@ -221,7 +224,7 @@
                                             <i class="fa fa-envelope-o fa-5x"></i>
                                         </div>
                                         <div class="col-xs-9 text-right">
-                                            <div class="huge">12345</div>
+                                            <div class="huge">796</div>
                                             <div>Emails</div>
                                         </div>
                                     </div>
@@ -244,7 +247,7 @@
                                             <i class="fa fa-comments fa-5x"></i>
                                         </div>
                                         <div class="col-xs-9 text-right">
-                                            <div class="huge">12345</div>
+                                            <div class="huge">360</div>
                                             <div>Chats</div>
                                         </div>
                                     </div>
@@ -305,7 +308,50 @@
                             </div>
                         </div>
                     </div>
-                <div style="text-align:left; padding-bottom: 5px;">
+                    <div class="col-lg-12 text-center">
+                        <div class="dropdown" style="text-align:left;">
+                          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            Choose Time Range
+                            <span class="caret"></span>
+                          </button>
+                          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <li><a href="#">last 5 days</a></li>
+                            <li><a href="#">last 7 days</a></li>
+                            <li><a href="#">last 1 months</a></li>
+                          </ul>
+                          <span> &nbsp; or Input a Time Range: </span>
+                          <input id="hichartFrom" type="date" placeholder="From">
+                          <span> to </span>
+                          <input id="hichartTo" type="date" placeholder="To">
+                          <button type="button" id="hichartSubmit" class="btn btn-info">submit</button>
+                        </div>
+                        <div id="container1" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                    </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Network Grid Section -->
+    <section id="network" class="bg-light-gray">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Network</h2>
+                </div>
+            </div>
+            <div class="col-lg-4" id="rightOne">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            Detail Information
+                        </div>
+                        <div class="panel-body" id="detail">
+                        </div>
+                        <div class="panel-footer" id="detailLink">
+                        </div>
+                    </div>
+                </div>
+            <div>
+                <div class="dropdown" style="text-align:center;">
                   <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                     Choose Time Range
                     <span class="caret"></span>
@@ -321,32 +367,9 @@
                   <input id="to" type="date" placeholder="To">
                   <button type="button" class="btn btn-info">submit</button>
                 </div>
-                <div id="container1" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                <div class="row text-center" id="svgplugin"></div>
             </div>
-        </div>
-    </section>
-
-    <!-- Network Grid Section -->
-    <section id="network" class="bg-light-gray">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Network</h2>
-                    <h3 class="section-subheading text-muted"> </h3>
-                </div>
-            </div>
-            <div class="col-lg-4" id="rightOne">
-                    <div class="panel panel-info">
-                        <div class="panel-heading">
-                            Detail Information
-                        </div>
-                        <div class="panel-body" id="detail">
-                        </div>
-                        <div class="panel-footer" id="detailLink">
-                        </div>
-                    </div>
-                </div>
-            <div class="row text-center" id="svgplugin"></div>
+            
         </div>
     </section>
 
@@ -356,11 +379,29 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">Chat</h2>
-                    <h3 class="section-subheading text-muted"></h3>
                 </div>
             </div>
-            <div class="col-lg-4" id="rightTwo">
+            <div class="col-lg-4" id="rightThree">
                     <div class="panel panel-info">
+                        <div class="panel-heading">
+                            Search
+                        </div>
+                        <div class="panel-body" id="detail3">
+                                <div class="input-group custom-search-form">
+                                    <input type="text" class="form-control" id="chatInput" placeholder="Name..">
+                                    <span class="input-group-btn">
+                                    <button class="btn btn-default" id="chatSearch" type="button">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                    <button class="btn btn-default" id="chatReset" type="button">
+                                        <i class="fa fa-refresh"></i>
+                                    </button>
+                                </span>
+                                </div>
+
+                        </div>
+                    </div>
+                    <div class="panel panel-info" id="rightTwo">
                         <div class="panel-heading">
                             Detail Information
                         </div>
@@ -370,7 +411,25 @@
                         </div>
                     </div>
                 </div>
-            <div class="row text-center" id="chatsvg"></div>
+            <div>
+                <div class="dropdown" style="text-align:right;">
+                  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    Choose Time Range
+                    <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <li><a href="#">last 5 days</a></li>
+                    <li><a href="#">last 7 days</a></li>
+                    <li><a href="#">last 1 months</a></li>
+                  </ul>
+                  <span> &nbsp; or Input a Time Range: </span>
+                  <input id="from" type="date" placeholder="From">
+                  <span> to </span>
+                  <input id="to" type="date" placeholder="To">
+                  <button type="button" class="btn btn-info">submit</button>
+                </div>
+                <div class="row text-center" id="chatsvg"></div>
+            </div>
         </div>
     </section>
 
@@ -380,15 +439,216 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">Abnormity Found</h2>
-                    <h3 class="section-subheading text-muted"> </h3>
+                </div>
+            </div>
+            <div>
+                <div class="dropdown" style="text-align:right;">
+                  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    Choose Time Range
+                    <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <li><a href="#">last 5 days</a></li>
+                    <li><a href="#">last 7 days</a></li>
+                    <li><a href="#">last 1 months</a></li>
+                  </ul>
+                  <span> &nbsp; or Input a Time Range: </span>
+                  <input id="from" type="date" placeholder="From">
+                  <span> to </span>
+                  <input id="to" type="date" placeholder="To">
+                  <button type="button" class="btn btn-info">submit</button>
+                </div>
+                <br>
+            </div>
+            <div class="row">
+               <div class="col-lg-6">
+                    <div class="panel panel-danger">
+                        <div class="panel-heading">
+                            AFK
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th> </th>
+                                            <th>Name</th>
+                                            <th>Missing Time</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="danger">
+                                            <td>1</td>
+                                            <td>Keith Chung</td>
+                                            <td>23 days</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>Arthur Zhou</td>
+                                            <td>17 days</td>
+                                        </tr>
+                                        <tr class="danger">
+                                            <td>3</td>
+                                            <td>Ian Zeng</td>
+                                            <td>8 days</td>
+                                        </tr>
+                                        <tr>
+                                            <td>4</td>
+                                            <td>Michael Shamos</td>
+                                            <td>5 days</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.table-responsive -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="panel panel-warning">
+                        <div class="panel-heading">
+                            Too Obvious Bridge
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                   <thead>
+                                        <tr>
+                                            <th> </th>
+                                            <th>Name</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="warning">
+                                            <td>1</td>
+                                            <td>Valjean</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>Fantine</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.table-responsive -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
                 </div>
             </div>
             <div class="row">
-               
-            </div>
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 text-center">
-                    <p class="large text-muted"> </p>
+                <div class="col-lg-6">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            Inactivity - Email
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th> </th>
+                                            <th>Name</th>
+                                            <th>Average Amount</th>
+                                            <th>Latest Day's amount</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="info">
+                                            <td>1</td>
+                                            <td>Keith Chung</td>
+                                            <td>4.35</td>
+                                            <td>3</td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>Arthur Zhou</td>
+                                            <td>28</td>
+                                            <td>3</td>
+                                        </tr>
+                                        <tr class="info">
+                                            <td>3</td>
+                                            <td>Scarlett Chen</td>
+                                            <td>17</td>
+                                            <td>2</td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>4</td>
+                                            <td>Jenny Tsai</td>
+                                            <td>4.13</td>
+                                            <td>6</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.table-responsive -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="panel panel-success">
+                        <div class="panel-heading">
+                            Inactivity - Chat
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Name</th>
+                                            <th>Average Amount</th>
+                                            <th>Latest Day's amount</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="success">
+                                            <td>1</td>
+                                            <td>Keith Chung</td>
+                                            <td>4.35</td>
+                                            <td>3</td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>Arthur Zhou</td>
+                                            <td>28</td>
+                                            <td>3</td>
+                                        </tr>
+                                        <tr class="success">
+                                            <td>3</td>
+                                            <td>Scarlett Chen</td>
+                                            <td>17</td>
+                                            <td>2</td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>4</td>
+                                            <td>Jenny Tsai</td>
+                                            <td>4.13</td>
+                                            <td>6</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.table-responsive -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
                 </div>
             </div>
         </div>

@@ -1,0 +1,39 @@
+{
+ "name": "",
+ "children": [
+  {
+   "name": "Practicum Team",
+   "children": [
+    {"name": "ArthurZhou", "size": 36, "group":1},
+    {"name": "StellaLong", "size": 75, "group":2},
+    {"name": "ScarlettChen", "size": 55, "group":3},
+    {"name": "JennyTsai", "size": 49, "group":1},
+    {"name": "KeithChung", "size": 8, "group":2},
+    {"name": "AhmadNazir", "size": 29, "group":3}
+   ]
+  },
+  {
+    "name":"League of Legends",
+    "children":[
+     {"name": "StellaLong", "size": 186, "group":2},
+     {"name": "ArthurZhou", "size": 56, "group":1},
+     {"name": "ThomasZhao", "size": 116, "group":2},
+     {"name": "LiangTian", "size": 76, "group":0},
+     {"name": "IanZeng", "size": 66, "group":1},
+     {"name": "KeithChung", "size": 168, "group":2},
+     {"name": "MattYang", "size": 156, "group":2}
+    ]
+  },
+  {
+    "name":"Let's Gossip",
+    "children":[
+     {"name": "StellaLong", "size": 56, "group":2},
+     {"name": "ArthurZhou", "size": 36, "group":1},
+     {"name": "StephanieFan", "size": 126, "group":3},
+     {"name": "StephanieLi", "size": 86, "group":0},
+     {"name": "IanZeng", "size": 26, "group":1},
+     {"name": "KeithChung", "size": 60, "group":2}
+    ]
+  }
+ ]
+}

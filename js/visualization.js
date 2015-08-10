@@ -1,6 +1,6 @@
 (function(win) {
   $('#rightOne').hide();
-  var width = 800,
+  var width = 900,
       height = 500;
 
   var color = d3.scale.category20();
@@ -152,4 +152,9 @@
           }]
       });
   });
+
+  $("#hichartSubmit").click(function(){
+    console.log("From: "+$("#hichartFrom")[0].value);
+    console.log("To: "+$("#hichartTo")[0].value);
+  })
 })(window);
