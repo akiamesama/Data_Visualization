@@ -1,12 +1,29 @@
 <html>
 <head>
 <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<style type="text/css">
+.link{
+       fill: #A5ABB6;
+  shaft-width: 1px;
+  font-size: 8px;
+  padding: 3px;
+  text-color-external: #000000;
+  text-color-internal: #FFFFFF;
+  caption: '<type>';
+}
 
+.nodeemployee{
+fill: #FF756E;
+  border-color: #E06760;
+  text-color-internal: #FFFFFF;
+  caption: '{name}';
+}
+</style>
   
 <script src="js/d3.min.js"></script>
 <script src="js/graph_logic.js"></script>
 <script type="text/javascript">
-var post_data = {"statements":[{"statement":"MATCH path = (n)-[r]->(m)  RETURN path",
+var post_data = {"statements":[{"statement":"MATCH path = (n)-[r]->(m) where n.name='Jiali Chen' RETURN path",
 				"resultDataContents":["graph"]}]};
 $.ajax({
        type: "POST",

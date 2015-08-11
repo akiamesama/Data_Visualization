@@ -45,7 +45,7 @@
     var node = svg.selectAll(".node")
         .data(graph.nodes).enter()
         .append("circle")
-        .attr("class", function (d) { return "node "+d.label })
+        .attr("class", function (d) { return "node"+d.label })
         .attr("r", 10)
         .attr("fill", function (d){return get_color[d.label]})
         .call(force.drag);
