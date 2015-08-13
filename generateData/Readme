@@ -1,0 +1,12 @@
+The folder is for generating data
+
+1. Please run generateCSV.py to generate the csv file from <SourceData> and <groupinfo>. It also generates the neo4j_script automatically.
+
+2. After runing the generateCSV.py, we got the neo4j_script. Then please run the script in the shell, which load data into our database.
+
+
+
+In conclusion, we need to run 2 programs here:
+1. python generateCSV.py 
+2. ./neo4j-shell --file /Users/Scarlett/Desktop/eBusiness/Practicum/generateData/neo4j_script
+#(Please make sure you are in the right directory to run the conresponding file)
