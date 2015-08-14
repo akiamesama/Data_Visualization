@@ -1,0 +1,47 @@
+<html>
+<head>
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<style type="text/css">
+.link{
+       fill: #A5ABB6;
+  shaft-width: 1px;
+  font-size: 8px;
+  padding: 3px;
+  text-color-external: #000000;
+  text-color-internal: #FFFFFF;
+  caption: '<type>';
+}
+
+.nodeemployee{
+fill: #FF756E;
+  border-color: #E06760;
+  text-color-internal: #FFFFFF;
+  caption: '{name}';
+}
+</style>
+  
+<script src="js/d3.min.js"></script>
+<script src="js/graph_logic.js"></script>
+<script type="text/javascript">
+var post_data = {"statements":[{"statement":"MATCH path = (n)-[r]->(m) where n.name='Jiali Chen' RETURN path",
+				"resultDataContents":["graph"]}]};
+$.ajax({
+       type: "POST",
+       accept: "application/json",
+       contentType:"application/json; charset=utf-8",
+       headers: {"Authorization":"Basic bmVvNGo6Y29ubmVjdHdpdGg="},
+       url: "http://localhost:7474/db/data/transaction/commit",
+       data: JSON.stringify(post_data),
+       success: function(data, textStatus, jqXHR){
+       draw_forced_directory(data);
+       },
+       failure: function(msg){
+       console.log("failed")
+       }
+       });
+</script>
+</head>
+<body>
+<div id="graph"></div>
+</body>
+</html>
