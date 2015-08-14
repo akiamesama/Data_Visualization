@@ -10,7 +10,11 @@
 
 
   $.ajax({
+<<<<<<< HEAD
       type:"POST",headers: {"Authorization": auth},
+=======
+      type:"POST",//headers: {"Authorization": auth},
+>>>>>>> origin/master
       accept: "application/json",
       contentType:"application/json; charset=utf-8",
       url: "http://52.20.59.19:7474/db/data/transaction/commit",
