@@ -1,21 +1,76 @@
 (function(win) {
+
+  var username = "neo4j";
+  var password = "connectwith";
+  var ecdPass = window.btoa(username+":"+password);
+  var auth = "Basic "+ ecdPass
+  var result;
+
+  var statement1 = "match path = (a)-[r]-(b) return path"
+  var post_data1 = {"statements":[{"statement":statement1,"resultDataContents":["graph"]}]}
+
+<<<<<<< HEAD
+ $.ajax({
+      type:"POST",headers: {"Authorization": auth},
+=======
+  $.ajax({
+      type:"POST",//headers: {"Authorization": auth},
+>>>>>>> origin/master
+      accept: "application/json",
+      contentType:"application/json; charset=utf-8",
+      url: "http://52.20.59.19:7474/db/data/transaction/commit",
+      data: JSON.stringify(post_data1),
+      success: function(data, textStatus, jqXHR){
+                        drawMail(neo4J_vis1(data));
+                        },
+      error:function(jqXHR, textStatus, errorThrown){
+                        alert(errorThrown);
+                        }
+    });  
+})(window);
+
+ function idIndex(a,id) {
+      for (var i=0;i<a.length;i++) 
+      {if (a[i].id == id) return i;}
+      return null;
+    }
+
+function neo4J_vis1(data){
+    //Creating graph object
+    var nodes=[], links=[];
+    data.results[0].data.forEach(function (row) {
+      row.graph.nodes.forEach(function (n) 
+      {
+        if (idIndex(nodes,n.id) == null)
+              nodes.push({id:n.id,name:n.properties.name,group:n.properties.group,email:n.properties.numOfEmails
+                      ,chat:n.properties.numOfChats});
+      });
+      links = links.concat( row.graph.relationships.map(function(r) {
+      return {source:idIndex(nodes,r.startNode),target:idIndex(nodes,r.endNode),value:r.properties.frequency};
+      }));
+    });
+    graph = {nodes:nodes, links:links};
+    return graph;
+ }
+
+ function drawMail(graph){
   $('#rightOne').hide();
   var width = 900,
-      height = 500;
+      height = 700;
 
   var color = d3.scale.category20();
 
   var force = d3.layout.force()
       .charge(-120)
-      .linkDistance(60)
+      .linkDistance(240)
       .size([width, height]);
 
   var svg = d3.select("#svgplugin").append("svg")
       .attr("width", width)
       .attr("height", height);
 
-  d3.json("miserables.json", function(error, graph) {
-    if (error) throw error;
+  //d3.json(result, function(error, graph) { //"miserables.json"
+    //if (error) throw error;
 
     force
         .nodes(graph.nodes)
@@ -32,7 +87,7 @@
         .data(graph.nodes)
         .enter().append("circle")
         .attr("class", "node")
-        .attr("r", 5)
+        .attr("r", 8)
         .style("fill", function(d) { return color(d.group); })
         .on("mouseover", function(d,i){
           d3.select(this).style("fill", "black");
@@ -41,7 +96,7 @@
           .duration(200)
           .attr("r",10);
           var g = "Team "+(d.group+1);
-          var txt = "<p> Name: "+d.name+"</p><p> Team: "+g+"</p><p> Chat Amount: "+d.chat+"</p>";
+          var txt = "<p> Name: "+d.name+"</p><p> Team: "+g+"</p><p> Chat Amount: "+d.chat+"</p><p> Email Amount: "+d.email+"</p>";
           $('#detail').html(txt);
           // var txt2 = "<a href='#"+d.name+"'class='portfolio-link' data-toggle='modal'> Detail About this person </a>";
           var txt2 = "<a href='#detailPage'class='portfolio-link' data-toggle='modal'> Detail About this person </a>";
@@ -54,7 +109,7 @@
           d3.select(this)
           .transition()
           .duration(200)
-          .attr("r",5);
+          .attr("r",8);
         })
         .on("mousedown", function(d,i){
           d3.select(this)
@@ -62,7 +117,7 @@
           d3.select(this)
           .transition()
           .duration(100)
-          .attr("r",5);
+          .attr("r",8);
         })
         .on("mouseup", function(d,i){
           d3.select(this)
@@ -99,7 +154,7 @@
       node.attr("cx", function(d) { return d.x; })
           .attr("cy", function(d) { return d.y; });
     });
-  });
+  //});
   $(".node").bind("click", function(){
     console.log("click the node");
   });
@@ -157,4 +212,4 @@
     console.log("From: "+$("#hichartFrom")[0].value);
     console.log("To: "+$("#hichartTo")[0].value);
   })
-})(window);
+ }
