@@ -10,10 +10,10 @@
   var post_data1 = {"statements":[{"statement":statement1,"resultDataContents":["graph"]}]}
 
   $.ajax({
-      type:"POST",headers: {"Authorization": auth},
+      type:"POST",//headers: {"Authorization": auth},
       accept: "application/json",
       contentType:"application/json; charset=utf-8",
-      url: "http://localhost:7474/db/data/transaction/commit",
+      url: "http://52.20.59.19:7474/db/data/transaction/commit",
       data: JSON.stringify(post_data1),
       success: function(data, textStatus, jqXHR){
                         drawMail(neo4J_vis1(data));

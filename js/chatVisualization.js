@@ -10,10 +10,10 @@
 
 
   $.ajax({
-      type:"POST",headers: {"Authorization": auth},
+      type:"POST",//headers: {"Authorization": auth},
       accept: "application/json",
       contentType:"application/json; charset=utf-8",
-      url: "http://localhost:7474/db/data/transaction/commit",
+      url: "http://52.20.59.19:7474/db/data/transaction/commit",
       data: JSON.stringify(post_data2),
       success: function(data, textStatus, jqXHR){
                 drawChat(neo4J_vis5(data));
