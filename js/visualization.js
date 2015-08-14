@@ -9,8 +9,13 @@
   var statement1 = "match path = (a)-[r]-(b) return path"
   var post_data1 = {"statements":[{"statement":statement1,"resultDataContents":["graph"]}]}
 
+<<<<<<< HEAD
  $.ajax({
       type:"POST",headers: {"Authorization": auth},
+=======
+  $.ajax({
+      type:"POST",//headers: {"Authorization": auth},
+>>>>>>> origin/master
       accept: "application/json",
       contentType:"application/json; charset=utf-8",
       url: "http://52.20.59.19:7474/db/data/transaction/commit",
