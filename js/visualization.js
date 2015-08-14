@@ -1,4 +1,54 @@
 (function(win) {
+
+  var username = "neo4j";
+  var password = "connectwith";
+  var ecdPass = window.btoa(username+":"+password);
+  var auth = "Basic "+ ecdPass
+  var result;
+
+  var statement1 = "match path = (a)-[r]-(b) return path"
+  var post_data1 = {"statements":[{"statement":statement1,"resultDataContents":["graph"]}]}
+
+  $.ajax({
+      type:"POST",headers: {"Authorization": auth},
+      accept: "application/json",
+      contentType:"application/json; charset=utf-8",
+      url: "http://localhost:7474/db/data/transaction/commit",
+      data: JSON.stringify(post_data1),
+      success: function(data, textStatus, jqXHR){
+                        drawMail(neo4J_vis1(data));
+                        },
+      error:function(jqXHR, textStatus, errorThrown){
+                        alert(errorThrown);
+                        }
+    });  
+})(window);
+
+ function idIndex(a,id) {
+      for (var i=0;i<a.length;i++) 
+      {if (a[i].id == id) return i;}
+      return null;
+    }
+
+function neo4J_vis1(data){
+    //Creating graph object
+    var nodes=[], links=[];
+    data.results[0].data.forEach(function (row) {
+      row.graph.nodes.forEach(function (n) 
+      {
+        if (idIndex(nodes,n.id) == null)
+              nodes.push({id:n.id,name:n.properties.name,group:n.properties.group,email:n.properties.numOfEmails
+                      ,chat:n.properties.numOfChats});
+      });
+      links = links.concat( row.graph.relationships.map(function(r) {
+      return {source:idIndex(nodes,r.startNode),target:idIndex(nodes,r.endNode),value:r.properties.frequency};
+      }));
+    });
+    graph = {nodes:nodes, links:links};
+    return graph;
+ }
+
+ function drawMail(graph){
   $('#rightOne').hide();
   var width = 900,
       height = 500;
@@ -14,8 +64,8 @@
       .attr("width", width)
       .attr("height", height);
 
-  d3.json("miserables.json", function(error, graph) {
-    if (error) throw error;
+  //d3.json(result, function(error, graph) { //"miserables.json"
+    //if (error) throw error;
 
     force
         .nodes(graph.nodes)
@@ -99,7 +149,7 @@
       node.attr("cx", function(d) { return d.x; })
           .attr("cy", function(d) { return d.y; });
     });
-  });
+  //});
   $(".node").bind("click", function(){
     console.log("click the node");
   });
@@ -157,4 +207,4 @@
     console.log("From: "+$("#hichartFrom")[0].value);
     console.log("To: "+$("#hichartTo")[0].value);
   })
-})(window);
+ }

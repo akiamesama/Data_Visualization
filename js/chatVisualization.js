@@ -1,4 +1,73 @@
 (function(win) {
+  
+  var username = "neo4j";
+  var password = "connectwith";
+  var ecdPass = window.btoa(username+":"+password);
+  var auth = "Basic "+ ecdPass
+
+  var statement2 = "match (a) return a"
+  var post_data2 = {"statements":[{"statement":statement2,"resultDataContents":["graph"]}]}
+
+
+  $.ajax({
+      type:"POST",headers: {"Authorization": auth},
+      accept: "application/json",
+      contentType:"application/json; charset=utf-8",
+      url: "http://localhost:7474/db/data/transaction/commit",
+      data: JSON.stringify(post_data2),
+      success: function(data, textStatus, jqXHR){
+                drawChat(neo4J_vis5(data));
+                        },
+      error:function(jqXHR, textStatus, errorThrown){
+                        alert(errorThrown);
+                        }
+    });
+  
+})(window);
+
+ function idIndex(a,id) {
+      for (var i=0;i<a.length;i++) 
+      {if (a[i].id == id) return i;}
+      return null;
+    }
+
+function neo4J_vis5(data){
+    //Creating graph object
+    var outer=[],labels=[];
+    data.results[0].data.forEach(function (row) {
+      row.graph.nodes.forEach(function (n) 
+      {
+        n.labels.forEach(function (l){
+            test = $.inArray( l, labels )
+            if (test==-1) {
+              labels.push(l);
+            }
+        });             
+      });
+    });
+    var inner1=[],inner2=[];
+    labels.forEach(function (lab){      
+      var name = lab;
+      data.results[0].data.forEach(function (row) {
+        row.graph.nodes.forEach(function (n) 
+        {
+          n.labels.forEach(function (cek){
+            if (cek == name) {
+              inner2.push({name:n.properties.name,size:n.properties.numOfChats,group:n.properties.group
+                 ,email:n.properties.numOfEmails});
+            }
+          });
+        });
+      });
+      inner1.push({name:name,children:inner2});
+      inner2=[];
+    });
+    outer = {name:"", children:inner1};
+    return outer;
+ }
+
+ function drawChat(chatData){
+
   $('#rightTwo').hide();
   var w = 900,
       h = 700,
@@ -18,8 +87,8 @@
     .append("svg:g")
       .attr("transform", "translate(" + (w - r) / 2 + "," + (h - r) / 2 + ")");
 
-  d3.json("chat.json", function(data) {
-    node = root = data;
+  //d3.json(result, function(data) { //"chat.json"
+    node = root = chatData;
 
     var nodes = pack.nodes(root);
 
@@ -89,7 +158,7 @@
       $("#rightTwo").hide();
     })
     
-  });
+  //});
 
   function zoom(d, i) {
     var k = r / d.r / 2;
@@ -113,5 +182,4 @@
     d3.event.stopPropagation();
   }
 
-  
-})(window);
+ }
