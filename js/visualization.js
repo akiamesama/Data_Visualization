@@ -9,10 +9,8 @@
   var statement1 = "match path = (a)-[r]-(b) return path"
   var post_data1 = {"statements":[{"statement":statement1,"resultDataContents":["graph"]}]}
 
-
  $.ajax({
       type:"POST",headers: {"Authorization": auth},
-
       accept: "application/json",
       contentType:"application/json; charset=utf-8",
       url: "http://52.20.59.19:7474/db/data/transaction/commit",
@@ -209,4 +207,7 @@ function neo4J_vis1(data){
     console.log("From: "+$("#hichartFrom")[0].value);
     console.log("To: "+$("#hichartTo")[0].value);
   })
+  function detail(d){
+    // d.name d.chat d.email d.group
+  }
  }
