@@ -1,6 +1,7 @@
 import random
 import time
 numOfMail=500
+teamChatNumber=50
 teamName=["AppDirect","BNYM", "Branding Brand","Capco", "Community Elf", "Connect With", "Legal Analytics", "Nebulus", "Nectr", "Neighborhood Allies", "PNC", "Raymond James", "XFactr"]
 
 def strTimeProp(start, end, format, prop):
@@ -92,7 +93,8 @@ with open("neo4j_script","w") as f:
         if content[i].startswith("Team:"):
             team=content[i][5:]
         else:
-            f.write("MATCH (n { name: '%s' }) SET n :%s RETURN n;\n" % (content[i], team))
+            num=random.randrange(teamChatNumber)
+            f.write("MATCH (n { name: '%s' }) SET n :%s, n.%s=%d RETURN n;\n" % (content[i], team,team, num))
 
 
 
