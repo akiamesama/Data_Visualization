@@ -9,12 +9,8 @@
   var statement1 = "match path = (a)-[r]-(b) return path"
   var post_data1 = {"statements":[{"statement":statement1,"resultDataContents":["graph"]}]}
 
-  $.ajax({
-<<<<<<< HEAD
+ $.ajax({
       type:"POST",headers: {"Authorization": auth},
-=======
-      type:"POST",//headers: {"Authorization": auth},
->>>>>>> origin/master
       accept: "application/json",
       contentType:"application/json; charset=utf-8",
       url: "http://52.20.59.19:7474/db/data/transaction/commit",
@@ -95,7 +91,7 @@ function neo4J_vis1(data){
           .duration(200)
           .attr("r",10);
           var g = "Team "+(d.group+1);
-          var txt = "<p> Name: "+d.name+"</p><p> Team: "+g+"</p><p> Chat Amount: "+d.chat+"</p>";
+          var txt = "<p> Name: "+d.name+"</p><p> Team: "+g+"</p><p> Chat Amount: "+d.chat+"</p><p> Email Amount: "+d.email+"</p>";
           $('#detail').html(txt);
           // var txt2 = "<a href='#"+d.name+"'class='portfolio-link' data-toggle='modal'> Detail About this person </a>";
           var txt2 = "<a href='#detailPage'class='portfolio-link' data-toggle='modal'> Detail About this person </a>";
