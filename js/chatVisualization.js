@@ -3,17 +3,18 @@
   var username = "neo4j";
   var password = "connectwith";
   var ecdPass = window.btoa(username+":"+password);
-  var auth = "Basic "+ ecdPass
+  var auth = "Basic "+ ecdPass;
+  var url = "http://52.20.59.19:7474/db/data/transaction/commit";
 
   var statement2 = "match (a) return a"
   var post_data2 = {"statements":[{"statement":statement2,"resultDataContents":["graph"]}]}
 
 
   $.ajax({
-      type:"POST",headers: {"Authorization": auth},
+      type:"POST",//headers: {"Authorization": auth},
       accept: "application/json",
       contentType:"application/json; charset=utf-8",
-      url: "http://52.20.59.19:7474/db/data/transaction/commit",
+      url: url,
       data: JSON.stringify(post_data2),
       success: function(data, textStatus, jqXHR){
                 drawChat(neo4J_vis5(data));
@@ -53,7 +54,7 @@ function neo4J_vis5(data){
         {
           n.labels.forEach(function (cek){
             if (cek == name) {
-              inner2.push({name:n.properties.name,size:n.properties.numOfChats,group:n.properties.group
+              inner2.push({name:n.properties.name,size:n.properties[name],group:n.properties.group
                  ,email:n.properties.numOfEmails});
             }
           });
