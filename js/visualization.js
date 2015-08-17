@@ -17,6 +17,10 @@
 
 })(window);
 
+function neo4JNetRange(range){
+  alert("ok");
+}
+
 function neo4JNetwork(startDate,endDate){
   var username = "neo4j";
   var password = "connectwith";
@@ -285,7 +289,4 @@ function drawNetwork(graph){
     console.log("From: "+$("#hichartFrom")[0].value);
     console.log("To: "+$("#hichartTo")[0].value);
   })
-  function detail(d){
-    // d.name d.chat d.email d.group
-  }
  }
