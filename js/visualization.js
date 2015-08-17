@@ -47,6 +47,31 @@ function neo4JNetwork(startDate,endDate){
     });
 }
 
+function neo4JTopContacts(name){
+  var username = "neo4j";
+  var password = "connectwith";
+  var ecdPass = window.btoa(username+":"+password);
+  var auth = "Basic "+ ecdPass
+  var neo4Jurl = "http://52.20.59.19:7474/db/data/transaction/commit";
+  var statementNet="match (a)-[r]-(b)where a.name='"+name+"' return b.name as name,sum(toInt(r.frequency))as mail_mnt order by mail_mnt desc limit 3";
+  
+  var post_data_Net = {"statements":[{"statement":statementNet,"resultDataContents":["row"]}]}
+
+  $.ajax({
+      type:"POST",//headers: {"Authorization": auth},
+      accept: "application/json",
+      contentType:"application/json; charset=utf-8",
+      url: neo4Jurl,
+      data: JSON.stringify(post_data_Net),
+      success: function(data, textStatus, jqXHR){
+                        neo4J_visContact(data);
+                        },
+      error:function(jqXHR, textStatus, errorThrown){
+                        alert(errorThrown);
+                        }
+    });
+}
+
 function idIndex(a,id) {
     for (var i=0;i<a.length;i++) 
     {if (a[i].id == id) return i;}
@@ -73,6 +98,26 @@ function neo4J_visNetwork(data){
       graph = {nodes:nodes, links:links};
       return graph;
     }    
+}
+
+function neo4J_visContact(data){
+    //Creating graph object
+    var outer_data=[],inner_data={},rowNum=0;
+    data.results[0].data.forEach(function (row) {
+      col = 0; 
+      data.results[0].columns.forEach(function (column){
+          inner_data[column]=(row.row[col]);
+          col = col+1;  
+      });
+      outer_data = outer_data.concat(inner_data);
+      inner_data ={};
+    });
+    //return outer_data;
+    var listTxt="";
+    outer_data.forEach(function (list){
+      listTxt = listTxt + "<li>"+list.name+"</li>";
+    });
+    $('#topContact').html(listTxt);
 }
 
 function drawNetwork(graph){
@@ -119,8 +164,13 @@ function drawNetwork(graph){
           .duration(200)
           .attr("r",10);
           var g = "Team "+(d.group+1);
-          var txt = "<p> Name: "+d.name+"</p><p> Team: "+g+"</p><p> Chat Amount: "+d.chat+"</p><p> Email Amount: "+d.email+"</p>";
+          var txt = "<p> Name: "+d.name+"</p><p> Team: "+g+"</p><p> Email Amount: "+d.email+"</p><p> Chat Amount: "+d.chat+"</p>";
           $('#detail').html(txt);
+          $('#detailName').html("Name: "+d.name);
+          $('#detailTeam').html("Team: "+g);
+          $('#detailEmail').html("Email Amount: "+d.email);
+          $('#detailChat').html("Chat Amount: "+d.chat);
+          neo4JTopContacts(d.name);
           // var txt2 = "<a href='#"+d.name+"'class='portfolio-link' data-toggle='modal'> Detail About this person </a>";
           var txt2 = "<a href='#detailPage'class='portfolio-link' data-toggle='modal'> Detail About this person </a>";
           $('#detailLink').html(txt2);
