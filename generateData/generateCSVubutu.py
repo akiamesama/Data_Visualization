@@ -24,7 +24,7 @@ def strTimeProp(start, end, format, prop):
 def randomDate(start, end, prop):
 	#Specify the date format we need
     #return strTimeProp(start, end, '%m/%d/%Y %I:%M %p', prop)
-    return strTimeProp(start, end, '%Y-%m-%d', prop)
+    return strTimeProp(start, end, '%Y%m%d', prop)
 
 
 
@@ -45,7 +45,7 @@ links=[{} for i in range(numOfMail)]
 for i in range(numOfMail):
     from_ =random.randrange(length) 
     to_ = random.randrange(length)
-    timestamp=randomDate("2015-07-11", "2015-08-10", random.random())
+    timestamp=randomDate("20150716", "20150815", random.random())
     links[i]["source"]=nodes[from_]["Name"]
     nodes[from_]["numsOfEmails"]+=1
     links[i]["target"]=nodes[to_]["Name"]
