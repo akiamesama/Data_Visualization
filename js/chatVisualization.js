@@ -1,30 +1,52 @@
 (function(win) {
   
+  neo4JChat();
+
+  $( "#chatSubmit" ).click(function() {
+    var startDate = $( "#chatStart" ).val();
+    var endDate = $( "#chatEnd" ).val();
+    
+    if (startDate == "" || endDate == "") {
+      alert("please pick a range of Dates");
+    } else {
+      startDate = startDate.replace(/-/g, "");
+      endDate = endDate.replace(/-/g, "");
+      neo4JChat(startDate,endDate);
+    }      
+  });
+  
+})(window);
+
+function neo4JChat(startDate,endDate){
   var username = "neo4j";
   var password = "connectwith";
   var ecdPass = window.btoa(username+":"+password);
-  var auth = "Basic "+ ecdPass;
-  var url = "http://52.20.59.19:7474/db/data/transaction/commit";
-
-  var statement2 = "match (a) return a"
-  var post_data2 = {"statements":[{"statement":statement2,"resultDataContents":["graph"]}]}
-
+  var auth = "Basic "+ ecdPass
+  var neo4Jurl = "http://52.20.59.19:7474/db/data/transaction/commit";
+  var statementChat;
+  if (startDate == null || endDate == null ) {
+    statementChat = "match (a) return distinct a";
+  } else {
+    statementChat = "match (a)-[r]-(b) where toInt(r.timestamp)>="+startDate+" and toInt(r.timestamp)<="+endDate+" return distinct a";
+  } 
+  
+  var post_data_chat = {"statements":[{"statement":statementChat,"resultDataContents":["graph"]}]}
 
   $.ajax({
       type:"POST",//headers: {"Authorization": auth},
       accept: "application/json",
       contentType:"application/json; charset=utf-8",
-      url: url,
-      data: JSON.stringify(post_data2),
+      url: neo4Jurl,
+      data: JSON.stringify(post_data_chat),
       success: function(data, textStatus, jqXHR){
-                drawChat(neo4J_vis5(data));
+                        drawChat(neo4J_visChat(data));
                         },
       error:function(jqXHR, textStatus, errorThrown){
                         alert(errorThrown);
                         }
     });
-  
-})(window);
+
+}
 
  function idIndex(a,id) {
       for (var i=0;i<a.length;i++) 
@@ -32,43 +54,47 @@
       return null;
     }
 
-function neo4J_vis5(data){
+function neo4J_visChat(data){
     //Creating graph object
     var outer=[],labels=[];
-    data.results[0].data.forEach(function (row) {
-      row.graph.nodes.forEach(function (n) 
-      {
-        n.labels.forEach(function (l){
+    if (data.results[0] == null) {
+      alert("we are terribly sorry for not finding the proper information, please click ok to return to initial information");
+    } else {
+      data.results[0].data.forEach(function (row) {
+        row.graph.nodes.forEach(function (n) 
+        {
+          n.labels.forEach(function (l){
             test = $.inArray( l, labels )
             if (test==-1) {
               labels.push(l);
             }
-        });             
-      });
-    });
-    var inner1=[],inner2=[];
-    labels.forEach(function (lab){      
-      var name = lab;
-      data.results[0].data.forEach(function (row) {
-        row.graph.nodes.forEach(function (n) 
-        {
-          n.labels.forEach(function (cek){
-            if (cek == name) {
-              inner2.push({name:n.properties.name,size:n.properties[name],group:n.properties.group
-                 ,email:n.properties.numOfEmails});
-            }
-          });
+          });             
         });
       });
-      inner1.push({name:name,children:inner2});
-      inner2=[];
-    });
-    outer = {name:"", children:inner1};
-    return outer;
- }
+      var inner1=[],inner2=[];
+      labels.forEach(function (lab){      
+        var name = lab;
+        data.results[0].data.forEach(function (row) {
+          row.graph.nodes.forEach(function (n) 
+          {
+            n.labels.forEach(function (cek){
+              if (cek == name) {
+                inner2.push({name:n.properties.name,size:n.properties[name],group:n.properties.group
+                 ,email:n.properties.numOfEmails});
+              }
+            });
+          });
+        });
+        inner1.push({name:name,children:inner2});
+        inner2=[];
+      });
+      outer = {name:"", children:inner1};
+      return outer;
+    }    
+}
 
  function drawChat(chatData){
-
+  $('#chatsvg').empty();
   $('#rightTwo').hide();
   var w = 900,
       h = 700,

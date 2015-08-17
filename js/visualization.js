@@ -1,54 +1,82 @@
 (function(win) {
 
+  neo4JNetwork();
+
+  $( "#mailSubmit" ).click(function() {
+    var startDate = $( "#networkStart" ).val();
+    var endDate = $( "#networkEnd" ).val();
+    
+    if (startDate == "" || endDate == "") {
+      alert("please pick a range of Dates");
+    } else {
+      startDate = startDate.replace(/-/g, "");
+      endDate = endDate.replace(/-/g, "");
+      neo4JNetwork(startDate,endDate);
+    }      
+  });
+
+})(window);
+
+function neo4JNetwork(startDate,endDate){
   var username = "neo4j";
   var password = "connectwith";
   var ecdPass = window.btoa(username+":"+password);
   var auth = "Basic "+ ecdPass
-  var result;
+  var neo4Jurl = "http://52.20.59.19:7474/db/data/transaction/commit";
+  var statementNet;
+  if (startDate == null || endDate == null ) {
+    statementNet = "match path = (a)-[r]-(b) return path";
+  } else {
+    statementNet = "match path = (a)-[r]-(b) where toInt(r.timestamp)>="+startDate+" and toInt(r.timestamp)<="+endDate+" return path";
+  } 
+  
+  var post_data_Net = {"statements":[{"statement":statementNet,"resultDataContents":["graph"]}]}
 
-  var statement1 = "match path = (a)-[r]-(b) return path"
-  var post_data1 = {"statements":[{"statement":statement1,"resultDataContents":["graph"]}]}
-
- $.ajax({
-      type:"POST",headers: {"Authorization": auth},
+  $.ajax({
+      type:"POST",//headers: {"Authorization": auth},
       accept: "application/json",
       contentType:"application/json; charset=utf-8",
-      url: "http://52.20.59.19:7474/db/data/transaction/commit",
-      data: JSON.stringify(post_data1),
+      url: neo4Jurl,
+      data: JSON.stringify(post_data_Net),
       success: function(data, textStatus, jqXHR){
-                        drawMail(neo4J_vis1(data));
+                        drawNetwork(neo4J_visNetwork(data));
                         },
       error:function(jqXHR, textStatus, errorThrown){
                         alert(errorThrown);
                         }
-    });  
-})(window);
+    });
+}
 
- function idIndex(a,id) {
-      for (var i=0;i<a.length;i++) 
-      {if (a[i].id == id) return i;}
+function idIndex(a,id) {
+    for (var i=0;i<a.length;i++) 
+    {if (a[i].id == id) return i;}
       return null;
-    }
+}
 
-function neo4J_vis1(data){
+function neo4J_visNetwork(data){
     //Creating graph object
     var nodes=[], links=[];
-    data.results[0].data.forEach(function (row) {
-      row.graph.nodes.forEach(function (n) 
-      {
-        if (idIndex(nodes,n.id) == null)
+    if (data.results[0] == null) {
+      alert("we are terribly sorry for not finding the proper information, please click ok to return to initial information");
+    } else {
+      data.results[0].data.forEach(function (row) {
+        row.graph.nodes.forEach(function (n) 
+        {
+          if (idIndex(nodes,n.id) == null)
               nodes.push({id:n.id,name:n.properties.name,group:n.properties.group,email:n.properties.numOfEmails
                       ,chat:n.properties.numOfChats});
+        });
+        links = links.concat( row.graph.relationships.map(function(r) {
+        return {source:idIndex(nodes,r.startNode),target:idIndex(nodes,r.endNode),value:r.properties.frequency};
+        }));
       });
-      links = links.concat( row.graph.relationships.map(function(r) {
-      return {source:idIndex(nodes,r.startNode),target:idIndex(nodes,r.endNode),value:r.properties.frequency};
-      }));
-    });
-    graph = {nodes:nodes, links:links};
-    return graph;
- }
+      graph = {nodes:nodes, links:links};
+      return graph;
+    }    
+}
 
- function drawMail(graph){
+function drawNetwork(graph){
+  $('#svgplugin').empty();
   $('#rightOne').hide();
   var width = 900,
       height = 700;
