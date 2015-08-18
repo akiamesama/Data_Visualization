@@ -1,96 +1,204 @@
 MATCH (n) OPTIONAL MATCH (n)-[r]-() DELETE n,r;
 LOAD CSV WITH HEADERS FROM "file:///home/ubuntu/Data_Visualization/generateData/nodes.csv" AS line CREATE (e:employee { name: line.name, emailAddress: line.emailAddress, numOfChats: line.numOfChats, group: line.group, numOfEmails: line.numOfEmails});
 LOAD CSV WITH HEADERS FROM "file:///home/ubuntu/Data_Visualization/generateData/relations.csv" AS line MATCH (from:employee { name:line.from }) MATCH (to:employee { name:line.to }) CREATE (from)-[:MAIL_TO { timestamp: line.timestamp, frequency: line.frequency}]->(to);
-MATCH (n { name: 'Amey Jain' }) SET n :AppDirect, n.AppDirect=9 RETURN n;
-MATCH (n { name: 'Chang Liu' }) SET n :AppDirect, n.AppDirect=3 RETURN n;
-MATCH (n { name: 'Dian Wen' }) SET n :AppDirect, n.AppDirect=3 RETURN n;
-MATCH (n { name: 'Xinjun Chen' }) SET n :AppDirect, n.AppDirect=30 RETURN n;
-MATCH (n { name: 'Xue Lin' }) SET n :AppDirect, n.AppDirect=39 RETURN n;
-MATCH (n { name: 'Yifan Jia' }) SET n :AppDirect, n.AppDirect=4 RETURN n;
-MATCH (n { name: 'Aayush C' }) SET n :BNYM, n.BNYM=47 RETURN n;
-MATCH (n { name: 'Ankur Jain' }) SET n :BNYM, n.BNYM=23 RETURN n;
-MATCH (n { name: 'Era D' }) SET n :BNYM, n.BNYM=28 RETURN n;
-MATCH (n { name: 'Monica K' }) SET n :BNYM, n.BNYM=49 RETURN n;
-MATCH (n { name: 'Rugved S' }) SET n :BNYM, n.BNYM=24 RETURN n;
-MATCH (n { name: 'Tejaswi A' }) SET n :BNYM, n.BNYM=46 RETURN n;
-MATCH (n { name: 'Helen Du' }) SET n :BrandingBrand, n.BrandingBrand=26 RETURN n;
-MATCH (n { name: 'Jingyi Mei' }) SET n :BrandingBrand, n.BrandingBrand=18 RETURN n;
-MATCH (n { name: 'Kan Yang' }) SET n :BrandingBrand, n.BrandingBrand=29 RETURN n;
-MATCH (n { name: 'Kunal S' }) SET n :BrandingBrand, n.BrandingBrand=40 RETURN n;
-MATCH (n { name: 'Liang Tian' }) SET n :BrandingBrand, n.BrandingBrand=38 RETURN n;
-MATCH (n { name: 'Shi Wang' }) SET n :BrandingBrand, n.BrandingBrand=5 RETURN n;
-MATCH (n { name: 'Diwei Shi' }) SET n :Capco, n.Capco=10 RETURN n;
+CREATE (n:room {name: 'AppDirect'})
+MATCH (n { name: 'Amey Jain' }) SET n :AppDirect, n.AppDirect=21 RETURN n;
+match (from:employee{name:'Amey Jain'}) match (in:room{name:'AppDirect'}) create (from)-[:CHAT_IN {timestamp: '20150808', frequency: 11}]->(in)
+MATCH (n { name: 'Chang Liu' }) SET n :AppDirect, n.AppDirect=29 RETURN n;
+match (from:employee{name:'Chang Liu'}) match (in:room{name:'AppDirect'}) create (from)-[:CHAT_IN {timestamp: '20150805', frequency: 6}]->(in)
+MATCH (n { name: 'Dian Wen' }) SET n :AppDirect, n.AppDirect=38 RETURN n;
+match (from:employee{name:'Dian Wen'}) match (in:room{name:'AppDirect'}) create (from)-[:CHAT_IN {timestamp: '20150728', frequency: 13}]->(in)
+MATCH (n { name: 'Xinjun Chen' }) SET n :AppDirect, n.AppDirect=5 RETURN n;
+match (from:employee{name:'Xinjun Chen'}) match (in:room{name:'AppDirect'}) create (from)-[:CHAT_IN {timestamp: '20150815', frequency: 2}]->(in)
+MATCH (n { name: 'Xue Lin' }) SET n :AppDirect, n.AppDirect=24 RETURN n;
+match (from:employee{name:'Xue Lin'}) match (in:room{name:'AppDirect'}) create (from)-[:CHAT_IN {timestamp: '20150804', frequency: 8}]->(in)
+MATCH (n { name: 'Yifan Jia' }) SET n :AppDirect, n.AppDirect=1 RETURN n;
+match (from:employee{name:'Yifan Jia'}) match (in:room{name:'AppDirect'}) create (from)-[:CHAT_IN {timestamp: '20150801', frequency: 1}]->(in)
+CREATE (n:room {name: 'BNYM'})
+MATCH (n { name: 'Aayush Chandra' }) SET n :BNYM, n.BNYM=4 RETURN n;
+match (from:employee{name:'Aayush Chandra'}) match (in:room{name:'BNYM'}) create (from)-[:CHAT_IN {timestamp: '20150810', frequency: 11}]->(in)
+MATCH (n { name: 'Ankur Jain' }) SET n :BNYM, n.BNYM=41 RETURN n;
+match (from:employee{name:'Ankur Jain'}) match (in:room{name:'BNYM'}) create (from)-[:CHAT_IN {timestamp: '20150809', frequency: 2}]->(in)
+MATCH (n { name: 'Era Dwivedi' }) SET n :BNYM, n.BNYM=41 RETURN n;
+match (from:employee{name:'Era Dwivedi'}) match (in:room{name:'BNYM'}) create (from)-[:CHAT_IN {timestamp: '20150801', frequency: 11}]->(in)
+MATCH (n { name: 'Monica Kushwah' }) SET n :BNYM, n.BNYM=44 RETURN n;
+match (from:employee{name:'Monica Kushwah'}) match (in:room{name:'BNYM'}) create (from)-[:CHAT_IN {timestamp: '20150726', frequency: 12}]->(in)
+MATCH (n { name: 'Rugved Sarode' }) SET n :BNYM, n.BNYM=8 RETURN n;
+match (from:employee{name:'Rugved Sarode'}) match (in:room{name:'BNYM'}) create (from)-[:CHAT_IN {timestamp: '20150803', frequency: 13}]->(in)
+MATCH (n { name: 'Tejaswi Anantaraju' }) SET n :BNYM, n.BNYM=32 RETURN n;
+match (from:employee{name:'Tejaswi Anantaraju'}) match (in:room{name:'BNYM'}) create (from)-[:CHAT_IN {timestamp: '20150802', frequency: 6}]->(in)
+CREATE (n:room {name: 'BrandingBrand'})
+MATCH (n { name: 'Helen Du' }) SET n :BrandingBrand, n.BrandingBrand=29 RETURN n;
+match (from:employee{name:'Helen Du'}) match (in:room{name:'BrandingBrand'}) create (from)-[:CHAT_IN {timestamp: '20150807', frequency: 7}]->(in)
+MATCH (n { name: 'Jingyi Mei' }) SET n :BrandingBrand, n.BrandingBrand=5 RETURN n;
+match (from:employee{name:'Jingyi Mei'}) match (in:room{name:'BrandingBrand'}) create (from)-[:CHAT_IN {timestamp: '20150803', frequency: 2}]->(in)
+MATCH (n { name: 'Kan Yang' }) SET n :BrandingBrand, n.BrandingBrand=15 RETURN n;
+match (from:employee{name:'Kan Yang'}) match (in:room{name:'BrandingBrand'}) create (from)-[:CHAT_IN {timestamp: '20150728', frequency: 4}]->(in)
+MATCH (n { name: 'Kunal Sangwan' }) SET n :BrandingBrand, n.BrandingBrand=34 RETURN n;
+match (from:employee{name:'Kunal Sangwan'}) match (in:room{name:'BrandingBrand'}) create (from)-[:CHAT_IN {timestamp: '20150731', frequency: 5}]->(in)
+MATCH (n { name: 'Liang Tian' }) SET n :BrandingBrand, n.BrandingBrand=13 RETURN n;
+match (from:employee{name:'Liang Tian'}) match (in:room{name:'BrandingBrand'}) create (from)-[:CHAT_IN {timestamp: '20150801', frequency: 12}]->(in)
+MATCH (n { name: 'Shi Wang' }) SET n :BrandingBrand, n.BrandingBrand=11 RETURN n;
+match (from:employee{name:'Shi Wang'}) match (in:room{name:'BrandingBrand'}) create (from)-[:CHAT_IN {timestamp: '20150811', frequency: 7}]->(in)
+CREATE (n:room {name: 'Capco'})
+MATCH (n { name: 'Diwei Shi' }) SET n :Capco, n.Capco=46 RETURN n;
+match (from:employee{name:'Diwei Shi'}) match (in:room{name:'Capco'}) create (from)-[:CHAT_IN {timestamp: '20150721', frequency: 3}]->(in)
 MATCH (n { name: 'Lei Wang' }) SET n :Capco, n.Capco=28 RETURN n;
-MATCH (n { name: 'Ningxin Fang' }) SET n :Capco, n.Capco=10 RETURN n;
-MATCH (n { name: 'Xudong Song' }) SET n :Capco, n.Capco=8 RETURN n;
-MATCH (n { name: 'Yangkelin Wei' }) SET n :Capco, n.Capco=25 RETURN n;
-MATCH (n { name: 'Zhou Su' }) SET n :Capco, n.Capco=12 RETURN n;
-MATCH (n { name: 'Bin He' }) SET n :CommunityElf, n.CommunityElf=49 RETURN n;
-MATCH (n { name: 'Bingyu Zhang' }) SET n :CommunityElf, n.CommunityElf=39 RETURN n;
-MATCH (n { name: 'Hanze Xu' }) SET n :CommunityElf, n.CommunityElf=44 RETURN n;
-MATCH (n { name: 'Huimin Zhao' }) SET n :CommunityElf, n.CommunityElf=36 RETURN n;
-MATCH (n { name: 'Qianwen Li' }) SET n :CommunityElf, n.CommunityElf=45 RETURN n;
-MATCH (n { name: 'Yuexuan Li' }) SET n :CommunityElf, n.CommunityElf=10 RETURN n;
-MATCH (n { name: 'Ahmad Nazhir' }) SET n :ConnectWith, n.ConnectWith=47 RETURN n;
-MATCH (n { name: 'Yi Ting Tsai' }) SET n :ConnectWith, n.ConnectWith=5 RETURN n;
-MATCH (n { name: 'Kar Kei Chung' }) SET n :ConnectWith, n.ConnectWith=46 RETURN n;
-MATCH (n { name: 'Qiuyu Long' }) SET n :ConnectWith, n.ConnectWith=30 RETURN n;
-MATCH (n { name: 'Jiali Chen' }) SET n :ConnectWith, n.ConnectWith=7 RETURN n;
-MATCH (n { name: 'Xiaodong Zhou' }) SET n :ConnectWith, n.ConnectWith=14 RETURN n;
-MATCH (n { name: 'Chen Lu' }) SET n :LegalAnalytics, n.LegalAnalytics=15 RETURN n;
-MATCH (n { name: 'Haigang Yang' }) SET n :LegalAnalytics, n.LegalAnalytics=46 RETURN n;
-MATCH (n { name: 'Haisheng Yuan' }) SET n :LegalAnalytics, n.LegalAnalytics=30 RETURN n;
-MATCH (n { name: 'Tian Zheng' }) SET n :LegalAnalytics, n.LegalAnalytics=17 RETURN n;
-MATCH (n { name: 'Wei Liu' }) SET n :LegalAnalytics, n.LegalAnalytics=36 RETURN n;
-MATCH (n { name: 'Xintong Huang' }) SET n :LegalAnalytics, n.LegalAnalytics=17 RETURN n;
-MATCH (n { name: 'Gang Wu' }) SET n :Nebulus, n.Nebulus=16 RETURN n;
-MATCH (n { name: 'Jiayi Zhu' }) SET n :Nebulus, n.Nebulus=46 RETURN n;
-MATCH (n { name: 'Jike Li' }) SET n :Nebulus, n.Nebulus=15 RETURN n;
-MATCH (n { name: 'Naomi Shao' }) SET n :Nebulus, n.Nebulus=5 RETURN n;
-MATCH (n { name: 'Ran Zhao' }) SET n :Nebulus, n.Nebulus=28 RETURN n;
-MATCH (n { name: 'Avanthi Reddy' }) SET n :Nectr, n.Nectr=27 RETURN n;
-MATCH (n { name: 'Biqiu Li' }) SET n :Nectr, n.Nectr=22 RETURN n;
-MATCH (n { name: 'Huaming Lee' }) SET n :Nectr, n.Nectr=42 RETURN n;
-MATCH (n { name: 'Jian Chen' }) SET n :Nectr, n.Nectr=1 RETURN n;
-MATCH (n { name: 'Jiazi Wu' }) SET n :Nectr, n.Nectr=18 RETURN n;
-MATCH (n { name: 'Xu Zhao' }) SET n :Nectr, n.Nectr=6 RETURN n;
-MATCH (n { name: 'Camilo Cruz' }) SET n :NeighborhoodAllies, n.NeighborhoodAllies=24 RETURN n;
-MATCH (n { name: 'Jiewen Mao' }) SET n :NeighborhoodAllies, n.NeighborhoodAllies=29 RETURN n;
-MATCH (n { name: 'Jing Zhuang' }) SET n :NeighborhoodAllies, n.NeighborhoodAllies=11 RETURN n;
-MATCH (n { name: 'Jui-Pin Wang' }) SET n :NeighborhoodAllies, n.NeighborhoodAllies=0 RETURN n;
-MATCH (n { name: 'Mengqian Chu' }) SET n :NeighborhoodAllies, n.NeighborhoodAllies=30 RETURN n;
-MATCH (n { name: 'Siyuan Li' }) SET n :NeighborhoodAllies, n.NeighborhoodAllies=46 RETURN n;
-MATCH (n { name: 'Aditi Silawat' }) SET n :PNC, n.PNC=33 RETURN n;
-MATCH (n { name: 'Anjal Patni' }) SET n :PNC, n.PNC=10 RETURN n;
-MATCH (n { name: 'Huaju Yuan' }) SET n :PNC, n.PNC=3 RETURN n;
-MATCH (n { name: 'Liqun Chen' }) SET n :PNC, n.PNC=2 RETURN n;
-MATCH (n { name: 'Mudit Jaiswal' }) SET n :PNC, n.PNC=31 RETURN n;
-MATCH (n { name: 'Yiren Zeng' }) SET n :PNC, n.PNC=21 RETURN n;
-MATCH (n { name: 'Jialu Yuan' }) SET n :RaymondJames, n.RaymondJames=6 RETURN n;
-MATCH (n { name: 'Meiqi Lu' }) SET n :RaymondJames, n.RaymondJames=46 RETURN n;
-MATCH (n { name: 'Ni Jianing' }) SET n :RaymondJames, n.RaymondJames=33 RETURN n;
-MATCH (n { name: 'Wei Dai' }) SET n :RaymondJames, n.RaymondJames=41 RETURN n;
-MATCH (n { name: 'Weifeng Cui' }) SET n :RaymondJames, n.RaymondJames=0 RETURN n;
-MATCH (n { name: 'Wenxiao He' }) SET n :RaymondJames, n.RaymondJames=38 RETURN n;
-MATCH (n { name: 'Abhishek S' }) SET n :XFactr, n.XFactr=1 RETURN n;
-MATCH (n { name: 'Bingyang Zhao' }) SET n :XFactr, n.XFactr=35 RETURN n;
-MATCH (n { name: 'Jhalak G' }) SET n :XFactr, n.XFactr=4 RETURN n;
-MATCH (n { name: 'Juile Zhao' }) SET n :XFactr, n.XFactr=45 RETURN n;
-MATCH (n { name: 'Skandan C' }) SET n :XFactr, n.XFactr=24 RETURN n;
-MATCH (n { name: 'Yingyi Yang' }) SET n :XFactr, n.XFactr=37 RETURN n;
-MATCH (n { name: 'Qiuyu Long' }) SET n :Gossip, n.Gossip=34 RETURN n;
-MATCH (n { name: 'Ningxin Fan' }) SET n :Gossip, n.Gossip=34 RETURN n;
-MATCH (n { name: 'Jiali Chen' }) SET n :Gossip, n.Gossip=19 RETURN n;
-MATCH (n { name: 'Yangkelin Wei' }) SET n :Gossip, n.Gossip=31 RETURN n;
-MATCH (n { name: 'Helen Du' }) SET n :Gossip, n.Gossip=38 RETURN n;
-MATCH (n { name: 'Yuexuan Li' }) SET n :Gossip, n.Gossip=20 RETURN n;
-MATCH (n { name: 'Yiren Zeng' }) SET n :Gossip, n.Gossip=17 RETURN n;
-MATCH (n { name: 'Kar Kei Chung' }) SET n :Gossip, n.Gossip=7 RETURN n;
-MATCH (n { name: 'Qiuyu Long' }) SET n :LeagueofLegend, n.LeagueofLegend=33 RETURN n;
-MATCH (n { name: 'Kar Kei Chung' }) SET n :LeagueofLegend, n.LeagueofLegend=12 RETURN n;
-MATCH (n { name: 'Yiren Zeng' }) SET n :LeagueofLegend, n.LeagueofLegend=8 RETURN n;
-MATCH (n { name: 'Yuexuan Li' }) SET n :LeagueofLegend, n.LeagueofLegend=27 RETURN n;
-MATCH (n { name: 'Ningxin Fan' }) SET n :LeagueofLegend, n.LeagueofLegend=16 RETURN n;
-MATCH (n { name: 'Xiaodong Zhou' }) SET n :LeagueofLegend, n.LeagueofLegend=45 RETURN n;
-MATCH (n { name: 'Kan Yang' }) SET n :LeagueofLegend, n.LeagueofLegend=1 RETURN n;
-MATCH (n { name: 'Bingyang Zhao' }) SET n :LeagueofLegend, n.LeagueofLegend=16 RETURN n;
+match (from:employee{name:'Lei Wang'}) match (in:room{name:'Capco'}) create (from)-[:CHAT_IN {timestamp: '20150813', frequency: 9}]->(in)
+MATCH (n { name: 'Ningxin Fang' }) SET n :Capco, n.Capco=32 RETURN n;
+match (from:employee{name:'Ningxin Fang'}) match (in:room{name:'Capco'}) create (from)-[:CHAT_IN {timestamp: '20150817', frequency: 14}]->(in)
+MATCH (n { name: 'Xudong Song' }) SET n :Capco, n.Capco=29 RETURN n;
+match (from:employee{name:'Xudong Song'}) match (in:room{name:'Capco'}) create (from)-[:CHAT_IN {timestamp: '20150805', frequency: 13}]->(in)
+MATCH (n { name: 'Yangkelin Wei' }) SET n :Capco, n.Capco=44 RETURN n;
+match (from:employee{name:'Yangkelin Wei'}) match (in:room{name:'Capco'}) create (from)-[:CHAT_IN {timestamp: '20150727', frequency: 10}]->(in)
+MATCH (n { name: 'Zhou Su' }) SET n :Capco, n.Capco=31 RETURN n;
+match (from:employee{name:'Zhou Su'}) match (in:room{name:'Capco'}) create (from)-[:CHAT_IN {timestamp: '20150723', frequency: 12}]->(in)
+CREATE (n:room {name: 'CommunityElf'})
+MATCH (n { name: 'Bin He' }) SET n :CommunityElf, n.CommunityElf=16 RETURN n;
+match (from:employee{name:'Bin He'}) match (in:room{name:'CommunityElf'}) create (from)-[:CHAT_IN {timestamp: '20150728', frequency: 7}]->(in)
+MATCH (n { name: 'Bingyu Zhang' }) SET n :CommunityElf, n.CommunityElf=12 RETURN n;
+match (from:employee{name:'Bingyu Zhang'}) match (in:room{name:'CommunityElf'}) create (from)-[:CHAT_IN {timestamp: '20150809', frequency: 5}]->(in)
+MATCH (n { name: 'Hanze Xu' }) SET n :CommunityElf, n.CommunityElf=9 RETURN n;
+match (from:employee{name:'Hanze Xu'}) match (in:room{name:'CommunityElf'}) create (from)-[:CHAT_IN {timestamp: '20150722', frequency: 8}]->(in)
+MATCH (n { name: 'Huimin Zhao' }) SET n :CommunityElf, n.CommunityElf=42 RETURN n;
+match (from:employee{name:'Huimin Zhao'}) match (in:room{name:'CommunityElf'}) create (from)-[:CHAT_IN {timestamp: '20150720', frequency: 8}]->(in)
+MATCH (n { name: 'Qianwen Li' }) SET n :CommunityElf, n.CommunityElf=14 RETURN n;
+match (from:employee{name:'Qianwen Li'}) match (in:room{name:'CommunityElf'}) create (from)-[:CHAT_IN {timestamp: '20150801', frequency: 4}]->(in)
+MATCH (n { name: 'Yuexuan Li' }) SET n :CommunityElf, n.CommunityElf=16 RETURN n;
+match (from:employee{name:'Yuexuan Li'}) match (in:room{name:'CommunityElf'}) create (from)-[:CHAT_IN {timestamp: '20150804', frequency: 8}]->(in)
+CREATE (n:room {name: 'ConnectWith'})
+MATCH (n { name: 'Ahmad Nazhir' }) SET n :ConnectWith, n.ConnectWith=19 RETURN n;
+match (from:employee{name:'Ahmad Nazhir'}) match (in:room{name:'ConnectWith'}) create (from)-[:CHAT_IN {timestamp: '20150807', frequency: 7}]->(in)
+MATCH (n { name: 'Yi Ting Tsai' }) SET n :ConnectWith, n.ConnectWith=25 RETURN n;
+match (from:employee{name:'Yi Ting Tsai'}) match (in:room{name:'ConnectWith'}) create (from)-[:CHAT_IN {timestamp: '20150804', frequency: 3}]->(in)
+MATCH (n { name: 'Kar Kei Chung' }) SET n :ConnectWith, n.ConnectWith=13 RETURN n;
+match (from:employee{name:'Kar Kei Chung'}) match (in:room{name:'ConnectWith'}) create (from)-[:CHAT_IN {timestamp: '20150724', frequency: 13}]->(in)
+MATCH (n { name: 'Qiuyu Long' }) SET n :ConnectWith, n.ConnectWith=0 RETURN n;
+match (from:employee{name:'Qiuyu Long'}) match (in:room{name:'ConnectWith'}) create (from)-[:CHAT_IN {timestamp: '20150811', frequency: 8}]->(in)
+MATCH (n { name: 'Jiali Chen' }) SET n :ConnectWith, n.ConnectWith=15 RETURN n;
+match (from:employee{name:'Jiali Chen'}) match (in:room{name:'ConnectWith'}) create (from)-[:CHAT_IN {timestamp: '20150730', frequency: 6}]->(in)
+MATCH (n { name: 'Xiaodong Zhou' }) SET n :ConnectWith, n.ConnectWith=49 RETURN n;
+match (from:employee{name:'Xiaodong Zhou'}) match (in:room{name:'ConnectWith'}) create (from)-[:CHAT_IN {timestamp: '20150804', frequency: 3}]->(in)
+CREATE (n:room {name: 'LegalAnalytics'})
+MATCH (n { name: 'Chen Lu' }) SET n :LegalAnalytics, n.LegalAnalytics=16 RETURN n;
+match (from:employee{name:'Chen Lu'}) match (in:room{name:'LegalAnalytics'}) create (from)-[:CHAT_IN {timestamp: '20150726', frequency: 11}]->(in)
+MATCH (n { name: 'Haigang Yang' }) SET n :LegalAnalytics, n.LegalAnalytics=49 RETURN n;
+match (from:employee{name:'Haigang Yang'}) match (in:room{name:'LegalAnalytics'}) create (from)-[:CHAT_IN {timestamp: '20150812', frequency: 2}]->(in)
+MATCH (n { name: 'Haisheng Yuan' }) SET n :LegalAnalytics, n.LegalAnalytics=43 RETURN n;
+match (from:employee{name:'Haisheng Yuan'}) match (in:room{name:'LegalAnalytics'}) create (from)-[:CHAT_IN {timestamp: '20150806', frequency: 6}]->(in)
+MATCH (n { name: 'Tian Zheng' }) SET n :LegalAnalytics, n.LegalAnalytics=14 RETURN n;
+match (from:employee{name:'Tian Zheng'}) match (in:room{name:'LegalAnalytics'}) create (from)-[:CHAT_IN {timestamp: '20150812', frequency: 13}]->(in)
+MATCH (n { name: 'Wei Liu' }) SET n :LegalAnalytics, n.LegalAnalytics=8 RETURN n;
+match (from:employee{name:'Wei Liu'}) match (in:room{name:'LegalAnalytics'}) create (from)-[:CHAT_IN {timestamp: '20150725', frequency: 14}]->(in)
+MATCH (n { name: 'Xintong Huang' }) SET n :LegalAnalytics, n.LegalAnalytics=35 RETURN n;
+match (from:employee{name:'Xintong Huang'}) match (in:room{name:'LegalAnalytics'}) create (from)-[:CHAT_IN {timestamp: '20150809', frequency: 10}]->(in)
+CREATE (n:room {name: 'Nebulus'})
+MATCH (n { name: 'Gang Wu' }) SET n :Nebulus, n.Nebulus=49 RETURN n;
+match (from:employee{name:'Gang Wu'}) match (in:room{name:'Nebulus'}) create (from)-[:CHAT_IN {timestamp: '20150726', frequency: 3}]->(in)
+MATCH (n { name: 'Jiayi Zhu' }) SET n :Nebulus, n.Nebulus=12 RETURN n;
+match (from:employee{name:'Jiayi Zhu'}) match (in:room{name:'Nebulus'}) create (from)-[:CHAT_IN {timestamp: '20150722', frequency: 14}]->(in)
+MATCH (n { name: 'Jike Li' }) SET n :Nebulus, n.Nebulus=26 RETURN n;
+match (from:employee{name:'Jike Li'}) match (in:room{name:'Nebulus'}) create (from)-[:CHAT_IN {timestamp: '20150812', frequency: 1}]->(in)
+MATCH (n { name: 'Naomi Shao' }) SET n :Nebulus, n.Nebulus=11 RETURN n;
+match (from:employee{name:'Naomi Shao'}) match (in:room{name:'Nebulus'}) create (from)-[:CHAT_IN {timestamp: '20150807', frequency: 11}]->(in)
+MATCH (n { name: 'Ran Zhao' }) SET n :Nebulus, n.Nebulus=14 RETURN n;
+match (from:employee{name:'Ran Zhao'}) match (in:room{name:'Nebulus'}) create (from)-[:CHAT_IN {timestamp: '20150803', frequency: 6}]->(in)
+CREATE (n:room {name: 'Nectr'})
+MATCH (n { name: 'Avanthi Reddy' }) SET n :Nectr, n.Nectr=3 RETURN n;
+match (from:employee{name:'Avanthi Reddy'}) match (in:room{name:'Nectr'}) create (from)-[:CHAT_IN {timestamp: '20150815', frequency: 9}]->(in)
+MATCH (n { name: 'Biqiu Li' }) SET n :Nectr, n.Nectr=48 RETURN n;
+match (from:employee{name:'Biqiu Li'}) match (in:room{name:'Nectr'}) create (from)-[:CHAT_IN {timestamp: '20150808', frequency: 3}]->(in)
+MATCH (n { name: 'Huaming Lee' }) SET n :Nectr, n.Nectr=43 RETURN n;
+match (from:employee{name:'Huaming Lee'}) match (in:room{name:'Nectr'}) create (from)-[:CHAT_IN {timestamp: '20150811', frequency: 10}]->(in)
+MATCH (n { name: 'Jian Chen' }) SET n :Nectr, n.Nectr=16 RETURN n;
+match (from:employee{name:'Jian Chen'}) match (in:room{name:'Nectr'}) create (from)-[:CHAT_IN {timestamp: '20150731', frequency: 14}]->(in)
+MATCH (n { name: 'Jiazi Wu' }) SET n :Nectr, n.Nectr=31 RETURN n;
+match (from:employee{name:'Jiazi Wu'}) match (in:room{name:'Nectr'}) create (from)-[:CHAT_IN {timestamp: '20150725', frequency: 9}]->(in)
+MATCH (n { name: 'Xu Zhao' }) SET n :Nectr, n.Nectr=27 RETURN n;
+match (from:employee{name:'Xu Zhao'}) match (in:room{name:'Nectr'}) create (from)-[:CHAT_IN {timestamp: '20150807', frequency: 1}]->(in)
+CREATE (n:room {name: 'NeighborhoodAllies'})
+MATCH (n { name: 'Camilo Cruz' }) SET n :NeighborhoodAllies, n.NeighborhoodAllies=18 RETURN n;
+match (from:employee{name:'Camilo Cruz'}) match (in:room{name:'NeighborhoodAllies'}) create (from)-[:CHAT_IN {timestamp: '20150812', frequency: 14}]->(in)
+MATCH (n { name: 'Jiewen Mao' }) SET n :NeighborhoodAllies, n.NeighborhoodAllies=49 RETURN n;
+match (from:employee{name:'Jiewen Mao'}) match (in:room{name:'NeighborhoodAllies'}) create (from)-[:CHAT_IN {timestamp: '20150802', frequency: 14}]->(in)
+MATCH (n { name: 'Jing Zhuang' }) SET n :NeighborhoodAllies, n.NeighborhoodAllies=36 RETURN n;
+match (from:employee{name:'Jing Zhuang'}) match (in:room{name:'NeighborhoodAllies'}) create (from)-[:CHAT_IN {timestamp: '20150809', frequency: 10}]->(in)
+MATCH (n { name: 'Jui-Pin Wang' }) SET n :NeighborhoodAllies, n.NeighborhoodAllies=16 RETURN n;
+match (from:employee{name:'Jui-Pin Wang'}) match (in:room{name:'NeighborhoodAllies'}) create (from)-[:CHAT_IN {timestamp: '20150803', frequency: 13}]->(in)
+MATCH (n { name: 'Mengqian Chu' }) SET n :NeighborhoodAllies, n.NeighborhoodAllies=38 RETURN n;
+match (from:employee{name:'Mengqian Chu'}) match (in:room{name:'NeighborhoodAllies'}) create (from)-[:CHAT_IN {timestamp: '20150802', frequency: 6}]->(in)
+MATCH (n { name: 'Siyuan Li' }) SET n :NeighborhoodAllies, n.NeighborhoodAllies=20 RETURN n;
+match (from:employee{name:'Siyuan Li'}) match (in:room{name:'NeighborhoodAllies'}) create (from)-[:CHAT_IN {timestamp: '20150728', frequency: 5}]->(in)
+CREATE (n:room {name: 'PNC'})
+MATCH (n { name: 'Aditi Silawat' }) SET n :PNC, n.PNC=4 RETURN n;
+match (from:employee{name:'Aditi Silawat'}) match (in:room{name:'PNC'}) create (from)-[:CHAT_IN {timestamp: '20150816', frequency: 3}]->(in)
+MATCH (n { name: 'Anjal Patni' }) SET n :PNC, n.PNC=15 RETURN n;
+match (from:employee{name:'Anjal Patni'}) match (in:room{name:'PNC'}) create (from)-[:CHAT_IN {timestamp: '20150809', frequency: 12}]->(in)
+MATCH (n { name: 'Huaju Yuan' }) SET n :PNC, n.PNC=21 RETURN n;
+match (from:employee{name:'Huaju Yuan'}) match (in:room{name:'PNC'}) create (from)-[:CHAT_IN {timestamp: '20150806', frequency: 10}]->(in)
+MATCH (n { name: 'Liqun Chen' }) SET n :PNC, n.PNC=8 RETURN n;
+match (from:employee{name:'Liqun Chen'}) match (in:room{name:'PNC'}) create (from)-[:CHAT_IN {timestamp: '20150805', frequency: 7}]->(in)
+MATCH (n { name: 'Mudit Jaiswal' }) SET n :PNC, n.PNC=17 RETURN n;
+match (from:employee{name:'Mudit Jaiswal'}) match (in:room{name:'PNC'}) create (from)-[:CHAT_IN {timestamp: '20150808', frequency: 4}]->(in)
+MATCH (n { name: 'Yiren Zeng' }) SET n :PNC, n.PNC=5 RETURN n;
+match (from:employee{name:'Yiren Zeng'}) match (in:room{name:'PNC'}) create (from)-[:CHAT_IN {timestamp: '20150726', frequency: 9}]->(in)
+CREATE (n:room {name: 'RaymondJames'})
+MATCH (n { name: 'Jialu Yuan' }) SET n :RaymondJames, n.RaymondJames=15 RETURN n;
+match (from:employee{name:'Jialu Yuan'}) match (in:room{name:'RaymondJames'}) create (from)-[:CHAT_IN {timestamp: '20150813', frequency: 10}]->(in)
+MATCH (n { name: 'Meiqi Lu' }) SET n :RaymondJames, n.RaymondJames=43 RETURN n;
+match (from:employee{name:'Meiqi Lu'}) match (in:room{name:'RaymondJames'}) create (from)-[:CHAT_IN {timestamp: '20150727', frequency: 1}]->(in)
+MATCH (n { name: 'Ni Jianing' }) SET n :RaymondJames, n.RaymondJames=5 RETURN n;
+match (from:employee{name:'Ni Jianing'}) match (in:room{name:'RaymondJames'}) create (from)-[:CHAT_IN {timestamp: '20150810', frequency: 9}]->(in)
+MATCH (n { name: 'Wei Dai' }) SET n :RaymondJames, n.RaymondJames=1 RETURN n;
+match (from:employee{name:'Wei Dai'}) match (in:room{name:'RaymondJames'}) create (from)-[:CHAT_IN {timestamp: '20150812', frequency: 11}]->(in)
+MATCH (n { name: 'Weifeng Cui' }) SET n :RaymondJames, n.RaymondJames=43 RETURN n;
+match (from:employee{name:'Weifeng Cui'}) match (in:room{name:'RaymondJames'}) create (from)-[:CHAT_IN {timestamp: '20150804', frequency: 13}]->(in)
+MATCH (n { name: 'Wenxiao He' }) SET n :RaymondJames, n.RaymondJames=45 RETURN n;
+match (from:employee{name:'Wenxiao He'}) match (in:room{name:'RaymondJames'}) create (from)-[:CHAT_IN {timestamp: '20150810', frequency: 13}]->(in)
+CREATE (n:room {name: 'XFactr'})
+MATCH (n { name: 'Abhishek Shukla' }) SET n :XFactr, n.XFactr=42 RETURN n;
+match (from:employee{name:'Abhishek Shukla'}) match (in:room{name:'XFactr'}) create (from)-[:CHAT_IN {timestamp: '20150727', frequency: 14}]->(in)
+MATCH (n { name: 'Bingyang Zhao' }) SET n :XFactr, n.XFactr=11 RETURN n;
+match (from:employee{name:'Bingyang Zhao'}) match (in:room{name:'XFactr'}) create (from)-[:CHAT_IN {timestamp: '20150727', frequency: 5}]->(in)
+MATCH (n { name: 'Jhalak Goyal' }) SET n :XFactr, n.XFactr=16 RETURN n;
+match (from:employee{name:'Jhalak Goyal'}) match (in:room{name:'XFactr'}) create (from)-[:CHAT_IN {timestamp: '20150809', frequency: 14}]->(in)
+MATCH (n { name: 'Juile Zhao' }) SET n :XFactr, n.XFactr=49 RETURN n;
+match (from:employee{name:'Juile Zhao'}) match (in:room{name:'XFactr'}) create (from)-[:CHAT_IN {timestamp: '20150805', frequency: 4}]->(in)
+MATCH (n { name: 'Skandan Chockalingam' }) SET n :XFactr, n.XFactr=35 RETURN n;
+match (from:employee{name:'Skandan Chockalingam'}) match (in:room{name:'XFactr'}) create (from)-[:CHAT_IN {timestamp: '20150815', frequency: 9}]->(in)
+MATCH (n { name: 'Yingyi Yang' }) SET n :XFactr, n.XFactr=7 RETURN n;
+match (from:employee{name:'Yingyi Yang'}) match (in:room{name:'XFactr'}) create (from)-[:CHAT_IN {timestamp: '20150802', frequency: 11}]->(in)
+CREATE (n:room {name: 'Gossip'})
+MATCH (n { name: 'Qiuyu Long' }) SET n :Gossip, n.Gossip=6 RETURN n;
+match (from:employee{name:'Qiuyu Long'}) match (in:room{name:'Gossip'}) create (from)-[:CHAT_IN {timestamp: '20150815', frequency: 1}]->(in)
+MATCH (n { name: 'Ningxin Fan' }) SET n :Gossip, n.Gossip=19 RETURN n;
+match (from:employee{name:'Ningxin Fan'}) match (in:room{name:'Gossip'}) create (from)-[:CHAT_IN {timestamp: '20150721', frequency: 4}]->(in)
+MATCH (n { name: 'Jiali Chen' }) SET n :Gossip, n.Gossip=24 RETURN n;
+match (from:employee{name:'Jiali Chen'}) match (in:room{name:'Gossip'}) create (from)-[:CHAT_IN {timestamp: '20150720', frequency: 2}]->(in)
+MATCH (n { name: 'Yangkelin Wei' }) SET n :Gossip, n.Gossip=47 RETURN n;
+match (from:employee{name:'Yangkelin Wei'}) match (in:room{name:'Gossip'}) create (from)-[:CHAT_IN {timestamp: '20150815', frequency: 13}]->(in)
+MATCH (n { name: 'Helen Du' }) SET n :Gossip, n.Gossip=26 RETURN n;
+match (from:employee{name:'Helen Du'}) match (in:room{name:'Gossip'}) create (from)-[:CHAT_IN {timestamp: '20150730', frequency: 5}]->(in)
+MATCH (n { name: 'Yuexuan Li' }) SET n :Gossip, n.Gossip=44 RETURN n;
+match (from:employee{name:'Yuexuan Li'}) match (in:room{name:'Gossip'}) create (from)-[:CHAT_IN {timestamp: '20150723', frequency: 3}]->(in)
+MATCH (n { name: 'Yiren Zeng' }) SET n :Gossip, n.Gossip=5 RETURN n;
+match (from:employee{name:'Yiren Zeng'}) match (in:room{name:'Gossip'}) create (from)-[:CHAT_IN {timestamp: '20150730', frequency: 1}]->(in)
+MATCH (n { name: 'Kar Kei Chung' }) SET n :Gossip, n.Gossip=15 RETURN n;
+match (from:employee{name:'Kar Kei Chung'}) match (in:room{name:'Gossip'}) create (from)-[:CHAT_IN {timestamp: '20150810', frequency: 1}]->(in)
+CREATE (n:room {name: 'LeagueofLegend'})
+MATCH (n { name: 'Qiuyu Long' }) SET n :LeagueofLegend, n.LeagueofLegend=45 RETURN n;
+match (from:employee{name:'Qiuyu Long'}) match (in:room{name:'LeagueofLegend'}) create (from)-[:CHAT_IN {timestamp: '20150726', frequency: 1}]->(in)
+MATCH (n { name: 'Kar Kei Chung' }) SET n :LeagueofLegend, n.LeagueofLegend=27 RETURN n;
+match (from:employee{name:'Kar Kei Chung'}) match (in:room{name:'LeagueofLegend'}) create (from)-[:CHAT_IN {timestamp: '20150812', frequency: 10}]->(in)
+MATCH (n { name: 'Yiren Zeng' }) SET n :LeagueofLegend, n.LeagueofLegend=11 RETURN n;
+match (from:employee{name:'Yiren Zeng'}) match (in:room{name:'LeagueofLegend'}) create (from)-[:CHAT_IN {timestamp: '20150810', frequency: 3}]->(in)
+MATCH (n { name: 'Yuexuan Li' }) SET n :LeagueofLegend, n.LeagueofLegend=13 RETURN n;
+match (from:employee{name:'Yuexuan Li'}) match (in:room{name:'LeagueofLegend'}) create (from)-[:CHAT_IN {timestamp: '20150816', frequency: 6}]->(in)
+MATCH (n { name: 'Ningxin Fan' }) SET n :LeagueofLegend, n.LeagueofLegend=48 RETURN n;
+match (from:employee{name:'Ningxin Fan'}) match (in:room{name:'LeagueofLegend'}) create (from)-[:CHAT_IN {timestamp: '20150721', frequency: 4}]->(in)
+MATCH (n { name: 'Xiaodong Zhou' }) SET n :LeagueofLegend, n.LeagueofLegend=7 RETURN n;
+match (from:employee{name:'Xiaodong Zhou'}) match (in:room{name:'LeagueofLegend'}) create (from)-[:CHAT_IN {timestamp: '20150720', frequency: 3}]->(in)
+MATCH (n { name: 'Kan Yang' }) SET n :LeagueofLegend, n.LeagueofLegend=20 RETURN n;
+match (from:employee{name:'Kan Yang'}) match (in:room{name:'LeagueofLegend'}) create (from)-[:CHAT_IN {timestamp: '20150719', frequency: 12}]->(in)
+MATCH (n { name: 'Bingyang Zhao' }) SET n :LeagueofLegend, n.LeagueofLegend=18 RETURN n;
+match (from:employee{name:'Bingyang Zhao'}) match (in:room{name:'LeagueofLegend'}) create (from)-[:CHAT_IN {timestamp: '20150801', frequency: 12}]->(in)

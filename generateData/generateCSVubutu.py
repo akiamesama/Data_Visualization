@@ -50,10 +50,11 @@ for i in range(numOfMail):
     to_ = random.randrange(length)
     timestamp=randomDate(onemonthago, today, random.random())
     links[i]["source"]=nodes[from_]["Name"]
-    nodes[from_]["numsOfEmails"]+=1
+    frequency =random.randrange(7)+1
+    nodes[from_]["numsOfEmails"]+=frequency
     links[i]["target"]=nodes[to_]["Name"]
     links[i]["timestamp"]=timestamp
-    links[i]["frequency"]=str(random.randrange(7)+1)
+    links[i]["frequency"]=str(frequency)
     # print str(from_)+','+str(to_)+','+timestamp#for id#json
 # Json Format
 # data={}
@@ -87,6 +88,8 @@ with open("neo4j_script","w") as f:
         '"file:///home/ubuntu/Data_Visualization/generateData/relations.csv" AS line '
         'MATCH (from:employee { name:line.from }) MATCH (to:employee { name:line.to }) '
         'CREATE (from)-[:MAIL_TO { timestamp: line.timestamp, frequency: line.frequency}]->(to);\n')
+    
+
     with open("groupinfo") as g:
         content = g.readlines()
     content =[x.strip('\n') for x in content]
@@ -95,10 +98,13 @@ with open("neo4j_script","w") as f:
             continue
         if content[i].startswith("Team:"):
             team=content[i][5:]
+            f.write("CREATE (n:room {name: '%s'})\n" % team)
         else:
             num=random.randrange(teamChatNumber)
             f.write("MATCH (n { name: '%s' }) SET n :%s, n.%s=%d RETURN n;\n" % (content[i], team,team, num))
-
+            timestamp=randomDate(onemonthago, today, random.random())
+            frequency =random.randrange(14)+1
+            f.write("match (from:employee{name:'%s'}) match (in:room{name:'%s'}) create (from)-[:CHAT_IN {timestamp: '%s', frequency: %d}]->(in)\n" % (content[i], team,timestamp, frequency))
 
 
 
