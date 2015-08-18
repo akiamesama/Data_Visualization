@@ -3,7 +3,10 @@ import time
 numOfMail=500
 teamChatNumber=50
 teamName=["AppDirect","BNYM", "Branding Brand","Capco", "Community Elf", "Connect With", "Legal Analytics", "Nebulus", "Nectr", "Neighborhood Allies", "PNC", "Raymond James", "XFactr"]
-
+from time import gmtime, strftime
+from datetime import datetime,timedelta
+today=strftime("%Y%m%d")
+onemonthago=(datetime.now() - timedelta(days=30)).strftime("%Y%m%d")
 def strTimeProp(start, end, format, prop):
     """Get a time at a proportion of a range of two formatted times.
 
@@ -45,7 +48,7 @@ links=[{} for i in range(numOfMail)]
 for i in range(numOfMail):
     from_ =random.randrange(length) 
     to_ = random.randrange(length)
-    timestamp=randomDate("20150716", "20150815", random.random())
+    timestamp=randomDate(onemonthago, today, random.random())
     links[i]["source"]=nodes[from_]["Name"]
     nodes[from_]["numsOfEmails"]+=1
     links[i]["target"]=nodes[to_]["Name"]
