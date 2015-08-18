@@ -18,7 +18,12 @@
 })(window);
 
 function neo4JNetRange(range){
-  alert("ok");
+  var months = ['01','02','03','04','05','06','07','08','09','10','11','12']
+  var d = new Date();
+  var endDate = d.getFullYear()+months[d.getMonth()]+d.getDate();
+  d.setDate(d.getDate() - range);
+  var startDate = d.getFullYear()+months[d.getMonth()]+d.getDate();
+  neo4JNetwork(startDate,endDate);
 }
 
 function neo4JNetwork(startDate,endDate){
@@ -51,7 +56,7 @@ function neo4JNetwork(startDate,endDate){
     });
 }
 
-function neo4JTopContacts(name){
+function neo4JMailContacts(name){
   var username = "neo4j";
   var password = "connectwith";
   var ecdPass = window.btoa(username+":"+password);
@@ -174,7 +179,7 @@ function drawNetwork(graph){
           $('#detailTeam').html("Team: "+g);
           $('#detailEmail').html("Email Amount: "+d.email);
           $('#detailChat').html("Chat Amount: "+d.chat);
-          neo4JTopContacts(d.name);
+          neo4JMailContacts(d.name);
           // var txt2 = "<a href='#"+d.name+"'class='portfolio-link' data-toggle='modal'> Detail About this person </a>";
           var txt2 = "<a href='#detailPage'class='portfolio-link' data-toggle='modal'> Detail About this person </a>";
           $('#detailLink').html(txt2);

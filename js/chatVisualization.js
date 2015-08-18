@@ -17,6 +17,15 @@
   
 })(window);
 
+function neo4JChatRange(range){
+  var months = ['01','02','03','04','05','06','07','08','09','10','11','12']
+  var d = new Date();
+  var endDate = d.getFullYear()+months[d.getMonth()]+d.getDate();
+  d.setDate(d.getDate() - range);
+  var startDate = d.getFullYear()+months[d.getMonth()]+d.getDate();
+  neo4JChat(startDate,endDate);
+}
+
 function neo4JChat(startDate,endDate){
   var username = "neo4j";
   var password = "connectwith";
@@ -46,6 +55,31 @@ function neo4JChat(startDate,endDate){
                         }
     });
 
+}
+
+function neo4JChatContacts(name){
+  var username = "neo4j";
+  var password = "connectwith";
+  var ecdPass = window.btoa(username+":"+password);
+  var auth = "Basic "+ ecdPass
+  var neo4Jurl = "http://52.20.59.19:7474/db/data/transaction/commit";
+  var statementNet="match (a)-[r]-(b)where a.name='"+name+"' return b.name as name,sum(toInt(r.frequency))as mail_mnt order by mail_mnt desc limit 3";
+  
+  var post_data_Net = {"statements":[{"statement":statementNet,"resultDataContents":["row"]}]}
+
+  $.ajax({
+      type:"POST",//headers: {"Authorization": auth},
+      accept: "application/json",
+      contentType:"application/json; charset=utf-8",
+      url: neo4Jurl,
+      data: JSON.stringify(post_data_Net),
+      success: function(data, textStatus, jqXHR){
+                        neo4J_visContact(data);
+                        },
+      error:function(jqXHR, textStatus, errorThrown){
+                        alert(errorThrown);
+                        }
+    });
 }
 
  function idIndex(a,id) {
@@ -142,6 +176,11 @@ function neo4J_visChat(data){
             var g = "Team "+(d.group+1);
             var txt = "<p> Name: "+d.name+"</p><p> Team: "+g+"</p><p> Chat Amount: "+d.size+"</p>";
             $('#detail2').html(txt);
+            $('#detailName').html("Name: "+d.name);
+            $('#detailTeam').html("Team: "+g);
+            $('#detailEmail').html("Email Amount: "+d.email);
+            $('#detailChat').html("Chat Amount: "+d.size);
+            neo4JChatContacts(d.name);
             // var txt2 = "<a href='#"+d.name+"'class='portfolio-link' data-toggle='modal'> Detail About this person </a>";
             var txt2 = "<a href='#detailPage'class='portfolio-link' data-toggle='modal'> Detail About this person </a>";
             $('#detailLink2').html(txt2);
