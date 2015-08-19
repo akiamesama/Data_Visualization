@@ -11,7 +11,7 @@
     } else {
       startDate = startDate.replace(/-/g, "");
       endDate = endDate.replace(/-/g, "");
-      neo4JNetwork(startDate,endDate);
+      neo4JChart(startDate,endDate);
     }      
   });
 
