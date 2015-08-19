@@ -315,9 +315,9 @@
                             <span class="caret"></span>
                           </button>
                           <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                            <li><a href="#">last 5 days</a></li>
-                            <li><a href="#">last 7 days</a></li>
-                            <li><a href="#">last 1 months</a></li>
+                            <li><a href="#" onclick="neo4JChartRange(5);return false;">last 5 days</a></li>
+                            <li><a href="#" onclick="neo4JChartRange(7);return false;">last 7 days</a></li>
+                            <li><a href="#" onclick="neo4JChartRange(30);return false;">last 1 months</a></li>
                           </ul>
                           <span> &nbsp; or Input a Time Range: </span>
                           <input id="hichartFrom" type="date" placeholder="From">
@@ -691,15 +691,15 @@
                             <!-- Project Details Go Here -->
                             <h2>Detail Information</h2>
                             <p class="item-intro text-muted"></p>
-                            <p id="detailName">Name: Name: Stella</p>
-                            <p id="detailTeam">Team: Team 4</p>
-                            <p id="detailEmail">Email Amount: 6</p>
-                            <p id="detailChat">Chat Amount: 14</p>
+                            <p id="detailName">Name: </p>
+                            <p id="detailTeam">Team: </p>
+                            <p id="detailEmail">Email Amount:</p>
+                            <p id="detailChat">Chat Amount:</p>
                             <p>Top Three Contacts: </p>
                             <ul id="topContact" class="list-inline">
-                                <li>Scarlett</li>
-                                <li>Keith</li>
-                                <li>Arthur</li>
+                                <li>Name</li>
+                                <li>Name</li>
+                                <li>Name</li>
                                 <li></li>
                             </ul>
                             <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close </button>
@@ -709,9 +709,7 @@
             </div>
         </div>
     </div>
-    </div>
-
-        
+    </div>        
 
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
@@ -741,6 +739,7 @@
     <script src="http://code.highcharts.com/modules/data.js"></script>
     <script src="http://code.highcharts.com/modules/exporting.js"></script>
     <script src="js/highchartIndex.js"></script>
+    <script src="js/highchartComp.js"></script>
 
 </body>
 

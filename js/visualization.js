@@ -34,9 +34,9 @@ function neo4JNetwork(startDate,endDate){
   var neo4Jurl = "http://52.20.59.19:7474/db/data/transaction/commit";
   var statementNet;
   if (startDate == null || endDate == null ) {
-    statementNet = "match path = (a)-[r]-(b) return path";
+    statementNet = "match path = (a:employee)-[r]-(b:employee) return path";
   } else {
-    statementNet = "match path = (a)-[r]-(b) where toInt(r.timestamp)>="+startDate+" and toInt(r.timestamp)<="+endDate+" return path";
+    statementNet = "match path = (a:employee)-[r]-(b:employee) where toInt(r.timestamp)>="+startDate+" and toInt(r.timestamp)<="+endDate+" return path";
   } 
   
   var post_data_Net = {"statements":[{"statement":statementNet,"resultDataContents":["graph"]}]}
@@ -62,7 +62,7 @@ function neo4JMailContacts(name){
   var ecdPass = window.btoa(username+":"+password);
   var auth = "Basic "+ ecdPass
   var neo4Jurl = "http://52.20.59.19:7474/db/data/transaction/commit";
-  var statementNet="match (a)-[r]-(b)where a.name='"+name+"' return b.name as name,sum(toInt(r.frequency))as mail_mnt order by mail_mnt desc limit 3";
+  var statementNet="match (a:employee)-[r]-(b:employee)where a.name='"+name+"' return b.name as name,sum(toInt(r.frequency))as mail_mnt order by mail_mnt desc limit 3";
   
   var post_data_Net = {"statements":[{"statement":statementNet,"resultDataContents":["row"]}]}
 
@@ -240,58 +240,4 @@ function drawNetwork(graph){
   $(".node").bind("click", function(){
     console.log("click the node");
   });
-  $(function () {
-      $('#container1').highcharts({
-          chart: {
-              type: 'area'
-          },
-          title: {
-              text: 'Daily Amount of Email and Chat for Company 1'
-          },
-          xAxis: {
-              categories: ['7.22', '7.23', '7.24', '7.25', '7.26', '7.27', '7.28', '7.29', '7.30', '7.31'],
-              tickmarkPlacement: 'on',
-              title: {
-                  enabled: false
-              }
-          },
-          yAxis: [{
-            title: {
-              text: 'Email Units'
-            }
-          },{
-            title:{
-              text: 'Chat Units'
-            },
-            opposite: true
-          }],
-          tooltip: {
-              shared: true,
-          },
-          plotOptions: {
-              area: {
-                  stacking: 'normal',
-                  lineColor: '#666666',
-                  lineWidth: 1,
-                  marker: {
-                      lineWidth: 1,
-                      lineColor: '#666666'
-                  }
-              }
-          },
-          series: [{
-            name: 'Chat',
-            data: [888, 920, 810, 760, 850, 820, 750, 768, 830, 796],
-            yAxis: 1
-          }, {
-            name: 'Email',
-            data: [370, 410, 388, 407, 305, 450, 433, 412, 403, 360],
-          }]
-      });
-  });
-
-  $("#hichartSubmit").click(function(){
-    console.log("From: "+$("#hichartFrom")[0].value);
-    console.log("To: "+$("#hichartTo")[0].value);
-  })
  }

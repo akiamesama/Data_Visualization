@@ -34,9 +34,9 @@ function neo4JChat(startDate,endDate){
   var neo4Jurl = "http://52.20.59.19:7474/db/data/transaction/commit";
   var statementChat;
   if (startDate == null || endDate == null ) {
-    statementChat = "match (a) return distinct a";
+    statementChat = "match (a:employee) return distinct a";
   } else {
-    statementChat = "match (a)-[r]-(b) where toInt(r.timestamp)>="+startDate+" and toInt(r.timestamp)<="+endDate+" return distinct a";
+    statementChat = "match (a:employee)-[r]-(b:employee) where toInt(r.timestamp)>="+startDate+" and toInt(r.timestamp)<="+endDate+" return distinct a";
   } 
   
   var post_data_chat = {"statements":[{"statement":statementChat,"resultDataContents":["graph"]}]}
@@ -63,7 +63,7 @@ function neo4JChatContacts(name){
   var ecdPass = window.btoa(username+":"+password);
   var auth = "Basic "+ ecdPass
   var neo4Jurl = "http://52.20.59.19:7474/db/data/transaction/commit";
-  var statementNet="match (a)-[r]-(b)where a.name='"+name+"' return b.name as name,sum(toInt(r.frequency))as mail_mnt order by mail_mnt desc limit 3";
+  var statementNet="match (a:employee)-[r]-(b:employee)where a.name='"+name+"' return b.name as name,sum(toInt(r.frequency))as mail_mnt order by mail_mnt desc limit 3";
   
   var post_data_Net = {"statements":[{"statement":statementNet,"resultDataContents":["row"]}]}
 
