@@ -97,11 +97,12 @@ function neo4J_visNetwork(data){
         row.graph.nodes.forEach(function (n) 
         {
           if (idIndex(nodes,n.id) == null)
-              nodes.push({id:n.id,name:n.properties.name,group:n.properties.group,email:n.properties.numOfEmails
-                      ,chat:n.properties.numOfChats});
+              nodes.push({id:parseInt(n.id),name:n.properties.name,group:parseInt(n.properties.group)
+                          ,email:parseInt(n.properties.numOfEmails),chat:parseInt(n.properties.numOfChats)});
         });
         links = links.concat( row.graph.relationships.map(function(r) {
-        return {source:idIndex(nodes,r.startNode),target:idIndex(nodes,r.endNode),value:r.properties.frequency};
+        return {source:parseInt(idIndex(nodes,r.startNode)),target:parseInt(idIndex(nodes,r.endNode))
+                ,value:parseInt(r.properties.frequency)};
         }));
       });
       graph = {nodes:nodes, links:links};
@@ -146,7 +147,7 @@ function drawNetwork(graph){
       .attr("width", width)
       .attr("height", height);
 
-  //d3.json(result, function(error, graph) { //"miserables.json"
+  //d3.json("miserables.json", function(error, graph) { //"miserables.json"
     //if (error) throw error;
 
     force
@@ -156,7 +157,7 @@ function drawNetwork(graph){
 
     var link = svg.selectAll(".link")
         .data(graph.links)
-      .enter().append("line")
+        .enter().append("line")
         .attr("class", "link")
         .style("stroke-width", function(d) { return Math.sqrt(d.value); });
 
