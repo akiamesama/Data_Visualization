@@ -98,7 +98,7 @@ function neo4J_visNetwork(data){
         {
           if (idIndex(nodes,n.id) == null)
               nodes.push({id:parseInt(n.id),name:n.properties.name,group:parseInt(n.properties.group)
-                          ,email:parseInt(n.properties.numOfEmails),chat:parseInt(n.properties.numOfChats)});
+                          ,chat:parseInt(n.properties.numOfEmails),email:parseInt(n.properties.numOfChats)});
         });
         links = links.concat( row.graph.relationships.map(function(r) {
         return {source:parseInt(idIndex(nodes,r.startNode)),target:parseInt(idIndex(nodes,r.endNode))
@@ -139,9 +139,13 @@ function drawNetwork(graph){
   var color = d3.scale.category20();
 
   var force = d3.layout.force()
-      .charge(-120)
+      .charge(-500)
       .linkDistance(240)
+      .gravity(0.05)
+      .friction(0.45)
+      .linkStrength(0.6)
       .size([width, height]);
+
 
   var svg = d3.select("#svgplugin").append("svg")
       .attr("width", width)
@@ -210,7 +214,7 @@ function drawNetwork(graph){
           .duration(100)
           .attr("r",10);
         })
-        .on("click", function(d,i){
+        .on("dblclick", function(d,i){
           console.log("hi");
           d3.select(this)
           .style("fill", "black");
@@ -223,6 +227,7 @@ function drawNetwork(graph){
           $('#rightOne').append(newLink);
           $('#newLink').click();
         })
+        .on('click', connectedNodes) //Added code
         .call(force.drag);
 
     node.append("title")
@@ -241,4 +246,39 @@ function drawNetwork(graph){
   $(".node").bind("click", function(){
     console.log("click the node");
   });
+
+  //Toggle stores whether the highlighting is on
+  var toggle = 0;
+  //Create an array logging what is connected to what
+  var linkedByIndex = {};
+  for (i = 0; i < graph.nodes.length; i++) {
+      linkedByIndex[i + "," + i] = 1;
+  };
+  graph.links.forEach(function (d) {
+      linkedByIndex[d.source.index + "," + d.target.index] = 1;
+  });
+  //This function looks up whether a pair are neighbours
+  function neighboring(a, b) {
+      return linkedByIndex[a.index + "," + b.index];
+  }
+  function connectedNodes() {
+      if (toggle == 0) {
+          //Reduce the opacity of all but the neighbouring nodes
+          d = d3.select(this).node().__data__;
+          node.style("opacity", function (o) {
+              return neighboring(d, o) | neighboring(o, d) ? 1 : 0.1;
+          });
+          link.style("opacity", function (o) {
+              return d.index==o.source.index | d.index==o.target.index ? 1 : 0.1;
+          });
+          //Reduce the op
+          toggle = 1;
+      } else {
+          //Put them back to opacity=1
+          node.style("opacity", 1);
+          link.style("opacity", 1);
+          toggle = 0;
+      }
+  }
+
  }
