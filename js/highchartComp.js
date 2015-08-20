@@ -93,7 +93,7 @@ function neo4JChart(startDate,endDate){
 
 function neo4J_visChart(mail,chat){
     //Creating graph object
-    var chartData=[],dateData=[],mailData=[],chatData=[],counter=0;
+    var chartData=[],dateData=[],mailData=[],chatData=[],counter=0,mailMnt=0;chatMnt=0;
     if (mail.results[0] == null || chat.results[0] == null) {
       alert("we are terribly sorry for not finding the proper information, please click ok to return to initial information");
     } else {
@@ -112,7 +112,17 @@ function neo4J_visChart(mail,chat){
       });
     }
     chartData={date:dateData, mail:mailData, chat:chatData}; 
-    drawChart(chartData);   
+    drawChart(chartData);
+
+    mailData.forEach(function(count){
+      mailMnt = mailMnt + count;
+    });
+    $('#mailMnt').html(mailMnt); 
+
+    chatData.forEach(function(count){
+      chatMnt = chatMnt + count;
+    });
+    $('#chatMnt').html(chatMnt); 
 }
 
 function drawChart(chartData){
