@@ -1,7 +1,7 @@
 import random
 import time
 numOfMail=500
-teamChatNumber=50
+teamChatNumber=100
 teamName=["AppDirect","BNYM", "Branding Brand","Capco", "Community Elf", "Connect With", "Legal Analytics", "Nebulus", "Nectr", "Neighborhood Allies", "PNC", "Raymond James", "XFactr"]
 from time import gmtime, strftime
 from datetime import datetime,timedelta
@@ -98,13 +98,13 @@ with open("neo4j_script","w") as f:
             continue
         if content[i].startswith("Team:"):
             team=content[i][5:]
-            f.write("CREATE (n:room {name: '%s'})\n" % team)
+            f.write("CREATE (n:room {name: '%s'});\n" % team)
         else:
             num=random.randrange(teamChatNumber)
             f.write("MATCH (n { name: '%s' }) SET n :%s, n.%s=%d RETURN n;\n" % (content[i], team,team, num))
             timestamp=randomDate(onemonthago, today, random.random())
             frequency =random.randrange(14)+1
-            f.write("match (from:employee{name:'%s'}) match (in:room{name:'%s'}) create (from)-[:CHAT_IN {timestamp: '%s', frequency: %d}]->(in)\n" % (content[i], team,timestamp, frequency))
+            f.write("match (from:employee{name:'%s'}) match (in:room{name:'%s'}) create (from)-[:CHAT_IN {timestamp: '%s', frequency: %d}]->(in);\n" % (content[i], team,timestamp, num))
 
 
 
