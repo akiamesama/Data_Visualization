@@ -62,7 +62,7 @@ function neo4JMailContacts(name){
   var ecdPass = window.btoa(username+":"+password);
   var auth = "Basic "+ ecdPass
   var neo4Jurl = "http://52.20.59.19:7474/db/data/transaction/commit";
-  var statementNet="match (a:employee)-[r]-(b:employee)where a.name='"+name+"' return b.name as name,sum(toInt(r.frequency))as mail_mnt order by mail_mnt desc limit 3";
+  var statementNet="match (a:employee)-[r]-(b:employee) where a.name='"+name+"' return b.name as name,sum(toInt(r.frequency))as mail_mnt order by mail_mnt desc limit 3";
   
   var post_data_Net = {"statements":[{"statement":statementNet,"resultDataContents":["row"]}]}
 
