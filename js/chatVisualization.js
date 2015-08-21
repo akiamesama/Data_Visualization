@@ -157,7 +157,7 @@ function neo4J_visChat(data){
         .data(nodes)
       .enter().append("svg:circle")
         .attr("class", function(d) { return d.children ? "parent" : "child"; })
-        .attr("id",function(d){ return d.name.replace(' ','-')})
+        .attr("id",function(d){ return d.name.split(' ').join('-')})
         .attr("cx", function(d) { return d.x; })
         .attr("cy", function(d) { return d.y; })
         .attr("r", function(d) { return d.r; })
@@ -206,7 +206,7 @@ function neo4J_visChat(data){
       for (var i = 0; i < reset.length; i++) {
         reset[i].style.cssText = 'fill: #ccc';
       };
-      var search  = $("#chatInput")[0].value.replace(' ','-');
+      var search  = $("#chatInput")[0].value.split(' ').join('-');
       var query = "circle#" + search;
       var circle = $(query);
       console.log(circle.length);
