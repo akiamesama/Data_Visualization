@@ -179,8 +179,10 @@ function neo4J_visMailInac(data){
   var mailInac=[];
   var classFlag=0,rowCount=1,htmlText="",numFormat;
 
-  data.results[0].data.forEach(function (row) {    
-    mailInac.push({name:row.row[0],avg:row.row[1],days:row.row[2]});
+  data.results[0].data.forEach(function (row) {
+    if(row.row[2]<=(row.row[1]/3)){
+      mailInac.push({name:row.row[0],avg:row.row[1],days:row.row[2]});
+    }    
   });
 
   mailInac.forEach(function(row){
@@ -207,8 +209,10 @@ function neo4J_visChatInac(data){
   var chatInac=[];
   var classFlag=0,rowCount=1,htmlText="";
 
-  data.results[0].data.forEach(function (row) {    
-    chatInac.push({name:row.row[0],avg:row.row[1],days:row.row[2]});
+  data.results[0].data.forEach(function (row) {
+    if(row.row[2]<=(row.row[1]/3)){
+      chatInac.push({name:row.row[0],avg:row.row[1],days:row.row[2]});
+    }    
   });
 
   chatInac.forEach(function(row){
