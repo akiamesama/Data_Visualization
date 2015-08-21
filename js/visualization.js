@@ -200,9 +200,6 @@ function neo4J_visNetwork(data){
     for(var i = 0; i < n; i++) {
     	sizes[i] = (scores[i] - min) / (max - min) * 15 + 5;
     }
-    for(var i = 0; i < sizes.length; i++) {
-    	alert(sizes[i]);
-    }
     graph = {nodes:nodes, links:links, sizes:sizes};
       return graph;
     }    
