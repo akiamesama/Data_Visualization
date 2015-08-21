@@ -1,0 +1,102 @@
+Team:AppDirect
+Amey Jain
+Chang Liu
+Dian Wen
+Xinjun Chen
+Xue Lin
+Yifan Jia
+
+Team:BNYM
+Aayush Chandra
+Ankur Jain
+Era Dwivedi
+Monica Kushwah
+Rugved Sarode
+Tejaswi Anantaraju
+
+Team:BrandingBrand
+Helen Du
+Jingyi Mei
+Kan Yang
+Kunal Sangwan
+Liang Tian
+Shi Wang
+
+Team:Capco
+Diwei Shi
+Lei Wang
+Ningxin Fang
+Xudong Song
+Yangkelin Wei
+Zhou Su
+
+Team:CommunityElf
+Bin He
+Bingyu Zhang
+Hanze Xu
+Huimin Zhao
+Qianwen Li
+Yuexuan Li
+
+Team:ConnectWith
+Ahmad Nazhir
+Yi Ting Tsai
+Kar Kei Chung
+Qiuyu Long
+Jiali Chen
+Xiaodong Zhou
+
+Team:LegalAnalytics
+Chen Lu
+Haigang Yang
+Haisheng Yuan
+Tian Zheng
+Wei Liu
+Xintong Huang
+
+Team:Nebulus
+Gang Wu
+Jiayi Zhu
+Jike Li
+Naomi Shao
+Ran Zhao
+
+Team:Nectr
+Avanthi Reddy
+Biqiu Li
+Huaming Lee
+Jian Chen
+Jiazi Wu
+Xu Zhao
+
+Team:NeighborhoodAllies
+Camilo Cruz
+Jiewen Mao
+Jing Zhuang
+Jui-Pin Wang
+Mengqian Chu
+Siyuan Li
+
+Team:PNC
+Aditi Silawat
+Anjal Patni
+Huaju Yuan
+Liqun Chen
+Mudit Jaiswal
+Yiren Zeng
+
+Team:RaymondJames
+Jialu Yuan
+Meiqi Lu
+Ni Jianing
+Wei Dai
+Weifeng Cui
+Wenxiao He
+
+Team:XFactr
+Abhishek Shukla
+Bingyang Zhao
+Jhalak Goyal
+Juile Zhao
+Skandan Chockalingam
+Yingyi Yang
