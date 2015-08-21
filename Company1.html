@@ -29,7 +29,14 @@
       text-align: center;
       width: 230px;
     }
-    #rightOne,#rightThree{
+    .dropdown{
+        text-align: left;
+        padding-left: 100px;
+    }
+    #container1{
+        padding-top: 15px;
+    }
+    #rightThree{
         margin-top: 50px;
     }
     </style>
@@ -309,7 +316,7 @@
                         </div>
                     </div>
                     <div class="col-lg-12 text-center">
-                        <div class="dropdown" style="text-align:left;">
+                        <div class="dropdown" style="padding-left:20px;">
                           <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                             Choose Time Range
                             <span class="caret"></span>
@@ -339,8 +346,24 @@
                     <h2 class="section-heading">Network</h2>
                 </div>
             </div>
-            <div class="col-lg-4" id="rightOne">
+            <div class="col-lg-4" id="rightThree">
                     <div class="panel panel-info">
+                        <div class="panel-heading">
+                            Search
+                        </div>
+                        <div class="panel-body" id="detail3">
+                                <div class="input-group custom-search-form">
+                                    <input type="text" class="form-control" id="emailInput" placeholder="Name..">
+                                    <span class="input-group-btn">
+                                    <button class="btn btn-default" id="emailSearch" type="button">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
+                                </div>
+
+                        </div>
+                    </div>
+                    <div class="panel panel-info" id="rightOne">
                         <div class="panel-heading">
                             Detail Information
                         </div>
@@ -351,7 +374,7 @@
                     </div>
                 </div>
             <div>
-                <div class="dropdown" style="text-align:center;">
+                <div class="dropdown">
                   <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                     Choose Time Range
                     <span class="caret"></span>
@@ -412,7 +435,7 @@
                     </div>
                 </div>
             <div>
-                <div class="dropdown" style="text-align:right;">
+                <div class="dropdown">
                   <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                     Choose Time Range
                     <span class="caret"></span>
@@ -442,7 +465,7 @@
                 </div>
             </div>
             <div>
-                <div class="dropdown" style="text-align:right;">
+                <div class="dropdown">
                   <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                     Choose Time Range
                     <span class="caret"></span>
