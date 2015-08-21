@@ -89,7 +89,7 @@ function idIndex(a,id) {
 
 function neo4J_visNetwork(data){
     //Creating graph object
-    var nodes=[], links=[];
+    var nodes=[], links=[], scores=[];
     if (data.results[0] == null) {
       alert("we are terribly sorry for not finding the proper information, please click ok to return to initial information");
     } else {
@@ -105,7 +105,105 @@ function neo4J_visNetwork(data){
                 ,value:parseInt(r.properties.frequency)};
         }));
       });
-      graph = {nodes:nodes, links:links};
+      var n = nodes.length;
+    var path = new Array(n);
+    for(var i = 0; i < n; i++) {
+    	path[i] = new Array(n);
+    	for(var j = 0; j < n; j++) {
+    		path[i][j] = new Number(0);
+    	}
+    }
+    links.forEach(function (l){
+    	path[l.source][l.target] = 1;
+    	path[l.target][l.source] = 1;
+    })
+
+    var dist = new Array(n);
+    var count = new Array(n);
+
+    for(var i = 0; i < n; i++) {
+    	dist[i] = new Array(n);
+    	count[i] = new Array(n);
+    	for(var j = 0; j < n; j++) {
+    		dist[i][j] = new Number(Number.MAX_SAFE_INTEGER);
+    		count[i][j] = new Number(0);
+    	}
+    }
+
+    for(var i = 0; i < n; i++) {
+    	var visited = new Array(n);
+    	for(var t = 0; t < n; t++) {
+    		visited[t] = new Number(0);
+    	}
+    	visited[i] = 1;
+    	dist[i][i] = 0;
+    	count[i][i] = 1;
+    	var queue = [];
+    	queue.push(i);
+    	while(queue.length > 0) {
+    		var size = queue.length;
+    		for(var j = 0; j < size; j++) {
+    			var cur_city = queue.shift();
+    			visited[cur_city] = 1;
+    			for(var k = 0; k < n; k++) {
+    				if(cur_city != k && path[cur_city][k] == 1) {
+    					if(visited[k] == 0) {
+								dist[i][k] = dist[i][cur_city] + 1;
+								count[i][k] = count[i][cur_city];
+								visited[k] = 1;
+								queue.push(k);
+							} else {
+								if(dist[i][k] == dist[i][cur_city] + 1) {
+									count[i][k] += count[i][cur_city];
+								} else if(dist[i][k] >  dist[i][cur_city] + 1) {
+									dist[i][k] = dist[i][cur_city] + 1;
+									count[i][k] = count[i][cur_city];
+								}
+							}
+    				}
+    			}
+    		}
+    	}
+    }
+
+    var min = new Number(Number.MAX_SAFE_INTEGER);
+    var max = new Number(Number.MIN_SAFE_INTEGER);
+    for(var i = 0; i < n; i++) {
+    	var cur_bc = 0;
+    	for(var j = 0; j < n; j++) {
+    		if(i == j) {
+    			continue;
+    		}
+    		for(var k = 0; k < n; k++) {
+    			if(i == k) {
+    				continue;
+    			}
+
+    			if(dist[j][k] == dist[j][i] + dist[i][k]) {
+    				var all_paths = count[j][k];
+    				var paths_throughCur = count[j][i] * count[i][k];
+    				cur_bc += paths_throughCur / all_paths;
+    			}
+    		}
+    	}
+
+    	scores[i] = cur_bc;
+    	if(min > cur_bc) {
+    		min = cur_bc;
+    	}
+    	if(max < cur_bc) {
+    		max = cur_bc;
+    	}
+    }
+
+    var sizes = [];
+    for(var i = 0; i < n; i++) {
+    	sizes[i] = (scores[i] - min) / (max - min) * 15 + 5;
+    }
+    for(var i = 0; i < sizes.length; i++) {
+    	alert(sizes[i]);
+    }
+    graph = {nodes:nodes, links:links, sizes:sizes};
       return graph;
     }    
 }
@@ -140,10 +238,16 @@ function drawNetwork(graph){
 
   var force = d3.layout.force()
       .charge(-500)
-      .linkDistance(240)
-      .gravity(0.05)
-      .friction(0.45)
-      .linkStrength(0.6)
+      .linkDistance(function(l){
+        if(l.source.group == l.target.group) {
+          return 70;
+        } else {
+          return 240;
+        }
+      })
+      // .gravity(0.05)
+      // .friction(0.45)
+      // .linkStrength(0.6)
       .size([width, height]);
 
 
@@ -169,14 +273,30 @@ function drawNetwork(graph){
         .data(graph.nodes)
         .enter().append("circle")
         .attr("class", "node")
-        .attr("r", 8)
+        .attr("r", function(d) {
+        	var index = -1;
+        	for(var i = 0; i < graph.nodes.length; i++) {
+        		if(graph.nodes[i].id == d.id) {
+        			index = i;
+        			break;
+        		}
+        	}
+        	return graph.sizes[index]; })
         .style("fill", function(d) { return color(d.group); })
         .on("mouseover", function(d,i){
           d3.select(this).style("fill", "black");
           d3.select(this)
           .transition()
           .duration(200)
-          .attr("r",10);
+          .attr("r",function(d) {
+        	var index = -1;
+        	for(var i = 0; i < graph.nodes.length; i++) {
+        		if(graph.nodes[i].id == d.id) {
+        			index = i;
+        			break;
+        		}
+        	}
+        	return graph.sizes[index]; });
           var g = "Team "+(d.group+1);
           var txt = "<p> Name: "+d.name+"</p><p> Team: "+g+"</p><p> Email Amount: "+d.email+"</p><p> Chat Amount: "+d.chat+"</p>";
           $('#detail').html(txt);
@@ -196,7 +316,15 @@ function drawNetwork(graph){
           d3.select(this)
           .transition()
           .duration(200)
-          .attr("r",8);
+          .attr("r",function(d) {
+        	var index = -1;
+        	for(var i = 0; i < graph.nodes.length; i++) {
+        		if(graph.nodes[i].id == d.id) {
+        			index = i;
+        			break;
+        		}
+        	}
+        	return graph.sizes[index]; });
         })
         .on("mousedown", function(d,i){
           d3.select(this)
@@ -204,7 +332,15 @@ function drawNetwork(graph){
           d3.select(this)
           .transition()
           .duration(100)
-          .attr("r",8);
+          .attr("r",function(d) {
+        	var index = -1;
+        	for(var i = 0; i < graph.nodes.length; i++) {
+        		if(graph.nodes[i].id == d.id) {
+        			index = i;
+        			break;
+        		}
+        	}
+        	return graph.sizes[index]; });
         })
         .on("mouseup", function(d,i){
           d3.select(this)
@@ -212,7 +348,15 @@ function drawNetwork(graph){
           d3.select(this)
           .transition()
           .duration(100)
-          .attr("r",10);
+          .attr("r",function(d) {
+        	var index = -1;
+        	for(var i = 0; i < graph.nodes.length; i++) {
+        		if(graph.nodes[i].id == d.id) {
+        			index = i;
+        			break;
+        		}
+        	}
+        	return graph.sizes[index]; });
         })
         .on("dblclick", function(d,i){
           console.log("hi");
@@ -221,7 +365,15 @@ function drawNetwork(graph){
           d3.select(this)
           .transition()
           .duration(100)
-          .attr("r",10);
+          .attr("r",function(d) {
+        	var index = -1;
+        	for(var i = 0; i < graph.nodes.length; i++) {
+        		if(graph.nodes[i].id == d.id) {
+        			index = i;
+        			break;
+        		}
+        	}
+        	return graph.sizes[index]; });
           var newLink = document.createElement('a');
           $(newLink).attr("href","#detailPage").attr('class','portfolio-link').attr('data-toggle','modal').attr('id','newLink');
           $('#rightOne').append(newLink);
