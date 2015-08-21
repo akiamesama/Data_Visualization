@@ -50,6 +50,7 @@ function neo4JAFK(startDate,endDate){
 
   $.ajax({
       type:"POST",//headers: {"Authorization": auth},
+      async: false,
       accept: "application/json",
       contentType:"application/json; charset=utf-8",
       url: neo4Jurl,
@@ -88,6 +89,7 @@ function neo4JMailInac(startDate,endDate){
 
   $.ajax({
       type:"POST",//headers: {"Authorization": auth},
+      async: false,
       accept: "application/json",
       contentType:"application/json; charset=utf-8",
       url: neo4Jurl,
@@ -126,6 +128,7 @@ function neo4JChatInac(startDate,endDate){
 
   $.ajax({
       type:"POST",//headers: {"Authorization": auth},
+      async: false,
       accept: "application/json",
       contentType:"application/json; charset=utf-8",
       url: neo4Jurl,
@@ -173,6 +176,7 @@ function neo4J_visAFK(data){
   });
 
   $('#abnAFK').html(htmlText);
+  $('#abnoMnt').html(rowCount-1);
 }
 
 function neo4J_visMailInac(data){
@@ -203,6 +207,8 @@ function neo4J_visMailInac(data){
   });
 
   $('#mailInac').html(htmlText);
+  var abnoMnt = parseInt($('#abnoMnt').text());
+  $('#abnoMnt').html(abnoMnt+rowCount-1);
 }
 
 function neo4J_visChatInac(data){
@@ -233,4 +239,6 @@ function neo4J_visChatInac(data){
   });
 
   $('#chatInac').html(htmlText);
+  var abnoMnt = parseInt($('#abnoMnt').text());
+  $('#abnoMnt').html(abnoMnt+rowCount-1);
 }
