@@ -224,7 +224,7 @@
                                             <i class="fa fa-envelope-o fa-5x"></i>
                                         </div>
                                         <div class="col-xs-9 text-right">
-                                            <div class="huge">796</div>
+                                            <div id="mailMnt" class="huge">796</div>
                                             <div>Emails</div>
                                         </div>
                                     </div>
@@ -247,7 +247,7 @@
                                             <i class="fa fa-comments fa-5x"></i>
                                         </div>
                                         <div class="col-xs-9 text-right">
-                                            <div class="huge">360</div>
+                                            <div id="chatMnt" class="huge">360</div>
                                             <div>Chats</div>
                                         </div>
                                     </div>
@@ -270,7 +270,7 @@
                                             <i class="fa fa-warning fa-5x"></i>
                                         </div>
                                         <div class="col-xs-9 text-right">
-                                            <div class="huge">18</div>
+                                            <div id="abnoMnt"class="huge">18</div>
                                             <div>abnormity found</div>
                                         </div>
                                     </div>
@@ -315,9 +315,9 @@
                             <span class="caret"></span>
                           </button>
                           <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                            <li><a href="#">last 5 days</a></li>
-                            <li><a href="#">last 7 days</a></li>
-                            <li><a href="#">last 1 months</a></li>
+                            <li><a href="#" onclick="neo4JChartRange(5);return false;">last 5 days</a></li>
+                            <li><a href="#" onclick="neo4JChartRange(7);return false;">last 7 days</a></li>
+                            <li><a href="#" onclick="neo4JChartRange(30);return false;">last 1 months</a></li>
                           </ul>
                           <span> &nbsp; or Input a Time Range: </span>
                           <input id="hichartFrom" type="date" placeholder="From">
@@ -448,15 +448,15 @@
                     <span class="caret"></span>
                   </button>
                   <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                    <li><a href="#">last 5 days</a></li>
-                    <li><a href="#">last 7 days</a></li>
-                    <li><a href="#">last 1 months</a></li>
+                    <li><a href="#" onclick="neo4JAbnRange(5);return false;">last 5 days</a></li>
+                    <li><a href="#" onclick="neo4JAbnRange(7);return false;">last 7 days</a></li>
+                    <li><a href="#" onclick="neo4JAbnRange(30);return false;">last 1 months</a></li>
                   </ul>
                   <span> &nbsp; or Input a Time Range: </span>
-                  <input id="from" type="date" placeholder="From">
+                  <input id="abnFrom" type="date" placeholder="From">
                   <span> to </span>
-                  <input id="to" type="date" placeholder="To">
-                  <button type="button" class="btn btn-info">submit</button>
+                  <input id="abnTo" type="date" placeholder="To">
+                  <button id="abnSubmit" type="button" class="btn btn-info">submit</button>
                 </div>
                 <br>
             </div>
@@ -477,7 +477,7 @@
                                             <th>Missing Time</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="abnAFK">
                                         <tr class="danger">
                                             <td>1</td>
                                             <td>Keith Chung</td>
@@ -508,12 +508,12 @@
                     <!-- /.panel -->
                 </div>
 
-                <div class="col-lg-6">
+                <!--div class="col-lg-6">
                     <div class="panel panel-warning">
                         <div class="panel-heading">
                             Too Obvious Bridge
                         </div>
-                        <!-- /.panel-heading -->
+                        </.panel-heading >
                         <div class="panel-body">
                             <div class="table-responsive">
                                 <table class="table">
@@ -535,13 +535,13 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <!-- /.table-responsive -->
+                            </.table-responsive>
                         </div>
-                        <!-- /.panel-body -->
+                        </.panel-body>
                     </div>
-                    <!-- /.panel -->
+                    </.panel>
                 </div>
-            </div>
+            </div-->
             <div class="row">
                 <div class="col-lg-6">
                     <div class="panel panel-info">
@@ -560,7 +560,7 @@
                                             <th>Latest Day's amount</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id='mailInac'>
                                         <tr class="info">
                                             <td>1</td>
                                             <td>Keith Chung</td>
@@ -614,7 +614,7 @@
                                             <th>Latest Day's amount</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id='chatInac'>
                                         <tr class="success">
                                             <td>1</td>
                                             <td>Keith Chung</td>
@@ -691,15 +691,15 @@
                             <!-- Project Details Go Here -->
                             <h2>Detail Information</h2>
                             <p class="item-intro text-muted"></p>
-                            <p id="detailName">Name: Name: Stella</p>
-                            <p id="detailTeam">Team: Team 4</p>
-                            <p id="detailEmail">Email Amount: 6</p>
-                            <p id="detailChat">Chat Amount: 14</p>
+                            <p id="detailName">Name: </p>
+                            <p id="detailTeam">Team: </p>
+                            <p id="detailEmail">Email Amount:</p>
+                            <p id="detailChat">Chat Amount:</p>
                             <p>Top Three Contacts: </p>
                             <ul id="topContact" class="list-inline">
-                                <li>Scarlett</li>
-                                <li>Keith</li>
-                                <li>Arthur</li>
+                                <li>Name</li>
+                                <li>Name</li>
+                                <li>Name</li>
                                 <li></li>
                             </ul>
                             <button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-times"></i> Close </button>
@@ -709,9 +709,7 @@
             </div>
         </div>
     </div>
-    </div>
-
-        
+    </div>        
 
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
@@ -741,6 +739,8 @@
     <script src="http://code.highcharts.com/modules/data.js"></script>
     <script src="http://code.highcharts.com/modules/exporting.js"></script>
     <script src="js/highchartIndex.js"></script>
+    <script src="js/highchartComp.js"></script>
+    <script src="js/abnormity.js"></script>
 
 </body>
 
