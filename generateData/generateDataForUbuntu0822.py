@@ -1,6 +1,6 @@
 import random
 import time
-numOfMail=100
+numOfMail=10
 teamChatNumber=30
 teamMailNumber=20
 
@@ -34,7 +34,6 @@ def randomDate(start, end, prop):
 def chatsInroom(team):
     # generate random chats for teammembers
     
-    name_fre={}
     with open("neo4j_script","a") as f:
         f.write("CREATE (n:room {name: '%s'});\n" % team[0])
         for i in range(teamChatNumber):
@@ -46,8 +45,10 @@ def chatsInroom(team):
             f.write("match (from:employee{name:'%s'}) match (in:room{name:'%s'}) create (from)-[:CHAT_IN {timestamp: '%s', frequency: %d}]->(in);\n" % (member,team[0],timestamp,frequency))
         global groupcount
         groupcount+=1
-        for k,v in name_fre.items():
-            f.write("MATCH (n { name: '%s' }) SET n :%s, n.Group=%d, n.%s=%d; \n" % (k, team[0],groupcount,team[0], v))
+
+        for i in range(1, len(team)):
+            
+            f.write("MATCH (n { name: '%s' }) SET n :%s, n.Group=%d, n.%s=%d; \n" % (team[i], team[0],groupcount,team[0], totalCom[team[i]][1]))
 
 
 
@@ -142,10 +143,10 @@ team=""
 with open("neo4j_script","w") as f:
     f.write('MATCH (n) OPTIONAL MATCH (n)-[r]-() DELETE n,r;\n')
     f.write('LOAD CSV WITH HEADERS FROM'
-            ' "file:///Library/WebServer/Documents/test/generateData/nodes.csv" AS line '
+            ' "file:///home/ubuntu/Data_Visualization/generateData/nodes.csv" AS line '
             'CREATE (e:employee { name: line.name, emailAddress: line.emailAddress});\n')
     f.write('LOAD CSV WITH HEADERS FROM '
-        '"file:///Library/WebServer/Documents/test/generateData/relations.csv" AS line '
+        '"file:///home/ubuntu/Data_Visualization/generateData/relations.csv" AS line '
         'MATCH (from:employee { name:line.from }) MATCH (to:employee { name:line.to }) '
         'CREATE (from)-[:MAIL_TO { timestamp: line.timestamp, frequency: line.frequency}]->(to);\n')
 
