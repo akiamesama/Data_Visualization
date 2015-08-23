@@ -86,7 +86,7 @@ def loadTeamCommunication(groupinfo, formal):
             if team:
                 chatsInroom(team,formal);
                 # if formal:
-                    mailsInroom(team);
+                mailsInroom(team);
                 team=[]
             team.append(content[i][5:])
             
