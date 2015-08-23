@@ -142,10 +142,10 @@ team=""
 with open("neo4j_script","w") as f:
     f.write('MATCH (n) OPTIONAL MATCH (n)-[r]-() DELETE n,r;\n')
     f.write('LOAD CSV WITH HEADERS FROM'
-            ' "file:///Library/WebServer/Documents/test/generateData/nodes.csv" AS line '
+            ' "file:///home/ubuntu/Data_Visualization/generateData/nodes.csv" AS line '
             'CREATE (e:employee { name: line.name, emailAddress: line.emailAddress});\n')
     f.write('LOAD CSV WITH HEADERS FROM '
-        '"file:///Library/WebServer/Documents/test/generateData/relations.csv" AS line '
+        '"file:///home/ubuntu/Data_Visualization/generateData/relations.csv" AS line '
         'MATCH (from:employee { name:line.from }) MATCH (to:employee { name:line.to }) '
         'CREATE (from)-[:MAIL_TO { timestamp: line.timestamp, frequency: line.frequency}]->(to);\n')
 
