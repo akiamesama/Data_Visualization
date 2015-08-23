@@ -31,7 +31,7 @@ def randomDate(start, end, prop):
     #return strTimeProp(start, end, '%m/%d/%Y %I:%M %p', prop)
     return strTimeProp(start, end, '%Y%m%d', prop)
 
-def chatsInroom(team):
+def chatsInroom(team, formal):
     # generate random chats for teammembers
     
     with open("neo4j_script","a") as f:
@@ -47,9 +47,10 @@ def chatsInroom(team):
         groupcount+=1
 
         for i in range(1, len(team)):
-            
-            f.write("MATCH (n { name: '%s' }) SET n :%s, n.Group=%d, n.%s=%d; \n" % (team[i], team[0],groupcount,team[0], totalCom[team[i]][1]))
-
+            if formal:
+                f.write("MATCH (n { name: '%s' }) SET n :%s, n.Group=%d, n.%s=%d; \n" % (team[i], team[0],groupcount,team[0], totalCom[team[i]][1]))
+            else:
+                f.write("MATCH (n { name: '%s' }) SET n :%s,  n.%s=%d; \n" % (team[i], team[0],team[0], totalCom[team[i]][1]))
 
 
 
@@ -67,20 +68,22 @@ def mailsInroom(team):
  
             f.write("match (from:employee{name:'%s'}) match (to:employee {name:'%s'}) create (from)-[:MAIL_TO {timestamp: '%s', frequency: %d}]->(to);\n" % (member1,member2,timestamp,frequency))
 
-def loadTeamCommunication(groupinfo):
+def loadTeamCommunication(groupinfo, formal):
     global groupcount
     groupcount=0
     with open(groupinfo) as g:
         content = g.readlines()
     content =[x.strip('\n') for x in content]
+    content.append("Team:")#Just for ending
     team=[]
     for i in range(len(content)):
         if not content[i]:
             continue
         if content[i].startswith("Team:"):
             if team:
-                chatsInroom(team);
-                mailsInroom(team);
+                chatsInroom(team,formal);
+                if formal:
+                    mailsInroom(team);
                 team=[]
             team.append(content[i][5:])
             
@@ -150,7 +153,8 @@ with open("neo4j_script","w") as f:
         'MATCH (from:employee { name:line.from }) MATCH (to:employee { name:line.to }) '
         'CREATE (from)-[:MAIL_TO { timestamp: line.timestamp, frequency: line.frequency}]->(to);\n')
 
-loadTeamCommunication("formalTeam.txt")
+loadTeamCommunication("formalTeam.txt",True)
+loadTeamCommunication("informalTeam.txt", False)
 SetNumOfMailChats(totalCom)
 
 
