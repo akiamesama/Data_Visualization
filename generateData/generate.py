@@ -1,6 +1,6 @@
 import random
 import time
-numOfMail=10
+numOfMail=100
 teamChatNumber=30
 teamMailNumber=20
 
