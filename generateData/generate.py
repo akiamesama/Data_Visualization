@@ -1,6 +1,6 @@
 import random
 import time
-numOfMail=100
+numOfMail=50
 teamChatNumber=30
 teamMailNumber=20
 
@@ -85,7 +85,7 @@ def loadTeamCommunication(groupinfo, formal):
         if content[i].startswith("Team:"):
             if team:
                 chatsInroom(team,formal);
-                if formal:
+                # if formal:
                     mailsInroom(team);
                 team=[]
             team.append(content[i][5:])
