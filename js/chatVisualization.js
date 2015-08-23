@@ -113,7 +113,7 @@ function neo4J_visChat(data){
           {
             n.labels.forEach(function (cek){
               if (cek == name) {
-                inner2.push({name:n.properties.name,size:parseInt(n.properties[name]),group:parseInt(n.properties.group)
+                inner2.push({name:n.properties.name,size:parseInt(n.properties[name]),group:parseInt(n.properties.Group)
                  ,email:parseInt(n.properties.numOfEmails)});
               }
             });
