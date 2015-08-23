@@ -33,7 +33,9 @@ def randomDate(start, end, prop):
 
 def chatsInroom(team, formal):
     # generate random chats for teammembers
-    
+    name_fre={}
+    for i in range(1, len(team)):
+        name_fre[team[i]]=0
     with open("neo4j_script","a") as f:
         f.write("CREATE (n:room {name: '%s'});\n" % team[0])
         for i in range(teamChatNumber):
@@ -41,16 +43,17 @@ def chatsInroom(team, formal):
             timestamp=randomDate(onemonthago, today, random.random())
             frequency =random.randrange(14)+1
             totalCom[member][1]+=frequency
-           
+            name_fre[member]+=frequency
+            
             f.write("match (from:employee{name:'%s'}) match (in:room{name:'%s'}) create (from)-[:CHAT_IN {timestamp: '%s', frequency: %d}]->(in);\n" % (member,team[0],timestamp,frequency))
         global groupcount
         groupcount+=1
 
         for i in range(1, len(team)):
             if formal:
-                f.write("MATCH (n { name: '%s' }) SET n :%s, n.Group=%d, n.%s=%d; \n" % (team[i], team[0],groupcount,team[0], totalCom[team[i]][1]))
+                f.write("MATCH (n { name: '%s' }) SET n :%s, n.Group=%d, n.%s=%d; \n" % (team[i], team[0],groupcount,team[0], name_fre[team[i]]))
             else:
-                f.write("MATCH (n { name: '%s' }) SET n :%s,  n.%s=%d; \n" % (team[i], team[0],team[0], totalCom[team[i]][1]))
+                f.write("MATCH (n { name: '%s' }) SET n :%s,  n.%s=%d; \n" % (team[i], team[0],team[0], name_fre[team[i]]))
 
 
 
