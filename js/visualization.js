@@ -97,7 +97,7 @@ function neo4J_visNetwork(data){
         row.graph.nodes.forEach(function (n) 
         {
           if (idIndex(nodes,n.id) == null)
-              nodes.push({id:parseInt(n.id),name:n.properties.name,group:parseInt(n.properties.group)
+              nodes.push({id:parseInt(n.id),name:n.properties.name,group:parseInt(n.properties.Group)
                           ,email:parseInt(n.properties.numOfEmails),chat:parseInt(n.properties.numOfChats)});
         });
         links = links.concat( row.graph.relationships.map(function(r) {
