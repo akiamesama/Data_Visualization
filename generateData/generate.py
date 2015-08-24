@@ -1,7 +1,7 @@
 import random
 import time
-numOfMail=78
-teamChatNumber=30
+numOfMail=60
+teamChatNumber=50
 teamMailNumber=20
 
 teamName=["AppDirect","BNYM", "Branding Brand","Capco", "Community Elf", "Connect With", "Legal Analytics", "Nebulus", "Nectr", "Neighborhood Allies", "PNC", "Raymond James", "XFactr"]
@@ -80,7 +80,7 @@ def mailsInroom(team):
             if member2==member1:
                 continue
             timestamp=randomDate(onemonthago, today, random.random())
-            frequency =random.randrange(7)+1
+            frequency =random.randrange(5)+1
             totalCom[member1][0]+=frequency
  
             f.write("match (from:employee{name:'%s'}) match (to:employee {name:'%s'}) create (from)-[:MAIL_TO {timestamp: '%s', frequency: %d}]->(to);\n" % (member1,member2,timestamp,frequency))
