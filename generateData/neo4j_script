@@ -353,7 +353,7 @@ match (from:employee{name:'Qiuyu Long'}) match (to:employee {name:'Ahmad Nazhir'
 match (from:employee{name:'Qiuyu Long'}) match (to:employee {name:'Jiali Chen'}) create (from)-[:MAIL_TO {timestamp: '20150826', frequency: 6}]->(to);
 match (from:employee{name:'Qiuyu Long'}) match (to:employee {name:'Kar Kei Chung'}) create (from)-[:MAIL_TO {timestamp: '20150801', frequency: 2}]->(to);
 match (from:employee{name:'Jiali Chen'}) match (to:employee {name:'Qiuyu Long'}) create (from)-[:MAIL_TO {timestamp: '20150809', frequency: 4}]->(to);
-match (from:employee{name:'Xiaodong Zhou'}) match (to:employee {name:'Qiuyu Long'}) create (from)-[:MAIL_TO {timestamp: '20150806', frequency: 4}]->(to);
+match (from:employee{name:'Ahmad Nazhir'}) match (to:employee {name:'Qiuyu Long'}) create (from)-[:MAIL_TO {timestamp: '20150806', frequency: 4}]->(to);
 match (from:employee{name:'Jiali Chen'}) match (to:employee {name:'Ahmad Nazhir'}) create (from)-[:MAIL_TO {timestamp: '20150818', frequency: 5}]->(to);
 match (from:employee{name:'Kar Kei Chung'}) match (to:employee {name:'Qiuyu Long'}) create (from)-[:MAIL_TO {timestamp: '20150818', frequency: 1}]->(to);
 match (from:employee{name:'Ahmad Nazhir'}) match (to:employee {name:'Jiali Chen'}) create (from)-[:MAIL_TO {timestamp: '20150802', frequency: 5}]->(to);
