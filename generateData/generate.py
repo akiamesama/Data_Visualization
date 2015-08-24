@@ -49,7 +49,7 @@ def chatsInroom(team, formal):
         
         # -----8,27---- This part is specially design for Aug 27th.
         # All teams will have more communications on Aug 27th
-        for i in range(5):
+        for i in range(8):
             member=team[random.randrange(len(team)-1)+1]
             timestamp="20150827"
             frequency =random.randrange(3)+1
