@@ -49,15 +49,16 @@ def chatsInroom(team, formal):
         
         # -----8,27---- This part is specially design for Aug 27th.
         # All teams will have more communications on Aug 27th
-        for i in range(8):
-            member=team[random.randrange(len(team)-1)+1]
-            timestamp="20150827"
-            frequency =random.randrange(3)+1
-            totalCom[member][1]+=frequency
-            name_fre[member]+=frequency
-            
-            f.write("match (from:employee{name:'%s'}) match (in:room{name:'%s'}) create (from)-[:CHAT_IN {timestamp: '%s', frequency: %d}]->(in);\n" % (member,team[0],timestamp,frequency))
-        #----done for Aug 27th--------- 
+        if formal:
+            for i in range(8):
+                member=team[random.randrange(len(team)-1)+1]
+                timestamp="20150827"
+                frequency =random.randrange(15)+1
+                totalCom[member][1]+=frequency
+                name_fre[member]+=frequency
+                
+                f.write("match (from:employee{name:'%s'}) match (in:room{name:'%s'}) create (from)-[:CHAT_IN {timestamp: '%s', frequency: %d}]->(in);\n" % (member,team[0],timestamp,frequency))
+            #----done for Aug 27th--------- 
 
 
         global groupcount
