@@ -890,7 +890,7 @@ match (a{name:'Yuexuan Li'}) set a.numOfEmails=21, a.numOfChats=144;
 match (a{name:'Yingyi Yang'}) set a.numOfEmails=7, a.numOfChats=20;
 match (a{name:'Hanze Xu'}) set a.numOfEmails=8, a.numOfChats=16;
 match (a{name:'Jui-Pin Wang'}) set a.numOfEmails=9, a.numOfChats=54;
-match (a{name:'Xiaodong Zhou'}) set a.numOfEmails=16, a.numOfChats=52;
+match (a{name:'Xiaodong Zhou'}) set a.numOfEmails=10, a.numOfChats=52;
 match (a{name:'Jike Li'}) set a.numOfEmails=10, a.numOfChats=25;
 match (a{name:'Jiayi Zhu'}) set a.numOfEmails=28, a.numOfChats=41;
 match (a{name:'Bingyu Zhang'}) set a.numOfEmails=6, a.numOfChats=4;
