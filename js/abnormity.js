@@ -76,13 +76,15 @@ function neo4JMailInac(startDate,endDate){
     statementMailInac = statementMailInac + "match (a:employee)-[r:MAIL_TO]-(b) ";
     statementMailInac = statementMailInac + "with a.name as name,avg(toInt(r.frequency)) as avg,max(toInt(r.timestamp)) as max ";
     statementMailInac = statementMailInac + "match (c:employee)-[s:MAIL_TO]-(d) where c.name=name and toInt(s.timestamp)=max ";
-    statementMailInac = statementMailInac + "return name,avg,sum(toInt(s.frequency)) as mnt";
+    statementMailInac = statementMailInac + "return name,avg,sum(toInt(s.frequency)) as mnt ";
+    statementMailInac = statementMailInac + "order by avg desc";
   } else {
     statementMailInac = statementMailInac + "match (a:employee)-[r:MAIL_TO]-(b) ";
     statementMailInac = statementMailInac + "where toInt(r.timestamp)>="+startDate+" and toInt(r.timestamp)<="+endDate+" ";
     statementMailInac = statementMailInac + "with a.name as name,avg(toInt(r.frequency)) as avg,max(toInt(r.timestamp)) as max ";
     statementMailInac = statementMailInac + "match (c:employee)-[s:MAIL_TO]-(d) where c.name=name and toInt(s.timestamp)=max ";
     statementMailInac = statementMailInac + "return name,avg,sum(toInt(s.frequency)) as mnt";
+    statementMailInac = statementMailInac + "order by avg desc";
   } 
   
   var post_data_MailInac = {"statements":[{"statement":statementMailInac,"resultDataContents":["row"]}]}
@@ -115,14 +117,16 @@ function neo4JChatInac(startDate,endDate){
     statementChatInac = statementChatInac + "match (a:employee)-[r:CHAT_IN]-(b) ";
     statementChatInac = statementChatInac + "with a.name as name,avg(toInt(r.frequency)) as avg,max(toInt(r.timestamp)) as max ";
     statementChatInac = statementChatInac + "match (c:employee)-[s:CHAT_IN]-(d) where c.name=name and toInt(s.timestamp)=max ";
-    statementChatInac = statementChatInac + "return name,avg,sum(toInt(s.frequency)) as mnt";
+    statementChatInac = statementChatInac + "return name,avg,sum(toInt(s.frequency)) as mnt ";
+    statementChatInac = statementChatInac + "order by avg desc";
   } else {
     statementChatInac = statementChatInac + "match (a:employee)-[r:CHAT_IN]-(b) ";
     statementChatInac = statementChatInac + "where toInt(r.timestamp)>="+startDate+" and toInt(r.timestamp)<="+endDate+" ";
     statementChatInac = statementChatInac + "with a.name as name,avg(toInt(r.frequency)) as avg,max(toInt(r.timestamp)) as max ";
     statementChatInac = statementChatInac + "match (c:employee)-[s:CHAT_IN]-(d) where c.name=name and toInt(s.timestamp)=max ";
-    statementChatInac = statementChatInac + "return name,avg,sum(toInt(s.frequency)) as mnt";
-  } 
+    statementChatInac = statementChatInac + "return name,avg,sum(toInt(s.frequency)) as mnt ";
+    statementChatInac = statementChatInac + "order by avg desc";
+  }  
   
   var post_data_ChatInac = {"statements":[{"statement":statementChatInac,"resultDataContents":["row"]}]}
 
