@@ -92,6 +92,16 @@ def mailsInroom(team):
  
             f.write("match (from:employee{name:'%s'}) match (to:employee {name:'%s'}) create (from)-[:MAIL_TO {timestamp: '%s', frequency: %d}]->(to);\n" % (member1,member2,timestamp,frequency))
 
+        for i in range(8):
+            member1=team[random.randrange(len(team)-1)+1]
+            member2=team[random.randrange(len(team)-1)+1]
+            if member2==member1:
+                continue
+            timestamp="20150827"
+            frequency =random.randrange(3)+1
+            totalCom[member1][0]+=frequency
+            f.write("match (from:employee{name:'%s'}) match (to:employee {name:'%s'}) create (from)-[:MAIL_TO {timestamp: '%s', frequency: %d}]->(to);\n" % (member1,member2,timestamp,frequency))
+
 def loadTeamCommunication(groupinfo, formal):
     global groupcount
     groupcount=0
