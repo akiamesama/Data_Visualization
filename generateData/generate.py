@@ -41,6 +41,8 @@ def chatsInroom(team, formal):
         for i in range(teamChatNumber):
             member=team[random.randrange(len(team)-1)+1]
             timestamp=randomDate(onemonthago, today, random.random())
+            if timestamp=="20150814":
+                continue;
             frequency =random.randrange(14)+1
             totalCom[member][1]+=frequency
             name_fre[member]+=frequency
@@ -54,7 +56,7 @@ def chatsInroom(team, formal):
             if formal:
                 timestamp="20150827"
             else:
-                timestamp="20150827"
+                timestamp="20150814"
             frequency =random.randrange(3)+1
             totalCom[member][1]+=frequency
             name_fre[member]+=frequency
@@ -83,6 +85,8 @@ def mailsInroom(team):
             if member2==member1:
                 continue
             timestamp=randomDate(onemonthago, today, random.random())
+            if timestamp=="20150814":
+                continue;
             frequency =random.randrange(7)+1
             totalCom[member1][0]+=frequency
  
