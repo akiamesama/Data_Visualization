@@ -7,8 +7,8 @@ teamMailNumber=20
 teamName=["AppDirect","BNYM", "Branding Brand","Capco", "Community Elf", "Connect With", "Legal Analytics", "Nebulus", "Nectr", "Neighborhood Allies", "PNC", "Raymond James", "XFactr"]
 from time import gmtime, strftime
 from datetime import datetime,timedelta
-today=strftime("%Y%m%d")
-onemonthago=(datetime.now() - timedelta(days=30)).strftime("%Y%m%d")
+today="20150828"
+onemonthago="20150728"
 def strTimeProp(start, end, format, prop):
     """Get a time at a proportion of a range of two formatted times.
 
