@@ -1,6 +1,6 @@
 import random
 import time
-numOfMail=78
+numOfMail=100
 teamChatNumber=30
 teamMailNumber=20
 
@@ -87,7 +87,7 @@ def mailsInroom(team):
             timestamp=randomDate(onemonthago, today, random.random())
             if timestamp=="20150814":
                 continue;
-            frequency =random.randrange(7)+1
+            frequency =random.randrange(10)+1
             totalCom[member1][0]+=frequency
  
             f.write("match (from:employee{name:'%s'}) match (to:employee {name:'%s'}) create (from)-[:MAIL_TO {timestamp: '%s', frequency: %d}]->(to);\n" % (member1,member2,timestamp,frequency))
@@ -143,6 +143,8 @@ def loadnodesAndRel(sourcedata):
         from_ =random.randrange(length) 
         to_ = random.randrange(length)
         timestamp=randomDate(onemonthago, today, random.random())
+        while timestamp=="20150814":
+            timestamp=randomDate(onemonthago, today, random.random())
         links[i]["source"]=nodes[from_]["Name"]
         frequency =random.randrange(7)+1
         totalCom[nodes[from_]["Name"]][0]+=frequency
