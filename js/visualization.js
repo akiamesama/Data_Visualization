@@ -229,7 +229,7 @@ function drawNetwork(graph){
   $('#svgplugin').empty();
   $('#rightOne').hide();
   var width = 900,
-      height = 700;
+      height = 800;
 
   var color = d3.scale.category20();
 
@@ -237,9 +237,9 @@ function drawNetwork(graph){
       .charge(-500)
       .linkDistance(function(l){
         if(l.source.group == l.target.group) {
-          return 70;
+          return 50;
         } else {
-          return 240;
+          return 160;
         }
       })
       // .gravity(0.05)
