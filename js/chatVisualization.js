@@ -35,12 +35,12 @@ function neo4JChat(startDate,endDate){
   var statementChat="";
   if (startDate == null || endDate == null ) {
     statementChat = statementChat +"match (a:employee)-[r:CHAT_IN]-(b:room) ";
-    statementChat = statementChat +"return a.name,b.name,sum(toInt(r.frequency)),a.Group ";
+    statementChat = statementChat +"return distinct a.name,b.name,sum(toInt(r.frequency)),a.Group,a.numOfEmails ";
     statementChat = statementChat +"order by b.name";
   } else {
     statementChat = statementChat +"match (a:employee)-[r:CHAT_IN]-(b:room) ";
     statementChat = statementChat + "where toInt(r.timestamp)>="+startDate+" and toInt(r.timestamp)<="+endDate+" ";
-    statementChat = statementChat +"return a.name,b.name,sum(toInt(r.frequency)),a.Group ";
+    statementChat = statementChat +"return distinct a.name,b.name,sum(toInt(r.frequency)),a.Group,a.numOfEmails ";
     statementChat = statementChat +"order by b.name";
   } 
   
@@ -111,7 +111,7 @@ function neo4J_visChat(data){
         var name = lab;
         data.results[0].data.forEach(function (row) {
           if (row.row[1] == name) {
-             inner2.push({name:row.row[0],size:parseInt([row.row[2]]),group:parseInt([row.row[3]])});
+             inner2.push({name:row.row[0],size:parseInt([row.row[2]]),group:parseInt([row.row[3]]),email:parseInt([row.row[4]])});
           }
         });
         inner1.push({name:name,children:inner2});
@@ -173,7 +173,7 @@ function neo4J_visChat(data){
             $('#detail2').html(txt);
             $('#detailName').html("Name: "+d.name);
             $('#detailTeam').html("Team: "+g);
-            $('#detailEmail').html("");
+            $('#detailEmail').html("Email Amount: "+d.email);
             $('#detailChat').html("Chat Amount: "+d.size);
             neo4JChatContacts(d.name);
             // var txt2 = "<a href='#"+d.name+"'class='portfolio-link' data-toggle='modal'> Detail About this person </a>";
