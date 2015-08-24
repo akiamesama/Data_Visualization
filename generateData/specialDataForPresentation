@@ -2,6 +2,7 @@ MATCH (n)-[r:MAIL_TO]-(x) where n.name="Xiaodong Zhou" or x.name="Xiaodong Zhou"
 MATCH (n)-[r]-(x) where r.timestamp="20150814" set r.timestamp="20150827";
 match (from:employee{name:'Ningxin Fan'}) match (to:employee {name:'Xiaodong Zhou'}) create (from)-[:MAIL_TO {timestamp: '20150814', frequency: 15}]->(to);
 match (from:employee{name:'Xiaodong Zhou'}) match (to:employee {name:'Ningxin Fan'}) create (from)-[:MAIL_TO {timestamp: '20150730', frequency: 7}]->(to);
+match (from:employee{name:'Xiaodong Zhou'}) match (to:employee {name:'Hanze Xu'}) create (from)-[:MAIL_TO {timestamp: '20150814', frequency: 3}]->(to);
 match (from:employee{name:'Xiaodong Zhou'}) match (to:employee {name:'Ahmad Nazhir'}) create (from)-[:MAIL_TO {timestamp: '20150827', frequency: 1}]->(to);
 match (from:employee{name:'Jiali Chen'}) match (to:employee {name:'Ahmad Nazhir'}) create (from)-[:MAIL_TO {timestamp: '20150827', frequency: 5}]->(to);
 match (from:employee{name:'Qiuyu Long'}) match (to:employee {name:'Ahmad Nazhir'}) create (from)-[:MAIL_TO {timestamp: '20150827', frequency: 1}]->(to);
