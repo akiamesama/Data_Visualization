@@ -1,79 +1,51 @@
 from,to,timestamp,frequency
-Jing Zhuang,Jiazi Wu,20150802,7
-Haisheng Yuan,Yuexuan Li,20150827,5
-Mi Zhou,Jiewen Mao,20150809,1
-Weifeng Cui,Tian Zheng,20150824,4
-Mi Zhou,Qiuyu Long,20150821,4
-Dian Wen,Xiaodong Zhou,20150826,7
-Skandan Chockalingam,Mengqian Chu,20150730,3
-Era Dwivedi,Mudit Jaiswal,20150817,4
-Aayush Chandra,Ahmad Nazhir,20150812,5
-Diwei Shi,Weifeng Cui,20150815,3
-Jiali Chen,Amey Jain,20150801,4
-Kunal Sangwan,Jhalak Goyal,20150823,4
-Bin He,Jike Li,20150817,2
-Ningxin Fan,Xiaodong Zhou,20150821,4
-Shi Wang,Hanze Xu,20150823,7
-Haisheng Yuan,Xinjun Chen,20150816,3
-Huaju Yan,Xinjun Chen,20150803,6
-Chen Lu,Kar Kei Chung,20150818,6
-Haisheng Yuan,Dian Wen,20150820,3
-Dian Wen,Bin He,20150803,1
-Zhou Su,Hanze Xu,20150808,6
-Zhou Su,Mudit Jaiswal,20150823,2
-Diwei Shi,Tian Zheng,20150810,6
-Jiali Chen,Chen Lu,20150813,2
-Amey Jain,Huimin Zhao,20150809,5
-Xintong Huang,Kar Kei Chung,20150802,3
-Xudong Song,Bingyang Zhao,20150805,6
-Bingyang Zhao,Jiali Chen,20150824,6
-Era Dwivedi,Tejaswi Anantaraju,20150805,4
-Haigang Yang,Bingyu Zhang,20150728,2
-Bingyang Zhao,Avanthi Reddy,20150811,5
-Xuecong Shao,Haigang Yang,20150826,7
-Diwei Shi,Mudit Jaiswal,20150818,3
-Bin He,Mi Zhou,20150821,5
-Helen Du,Wei Dai,20150803,2
-Bingyu Zhang,Era Dwivedi,20150821,3
-Jianing Ni,Chen Lu,20150816,4
-Jhalak Goyal,Yangkelin Wei,20150814,6
-Ankur Jain,Shi Wang,20150731,6
-Xintong Huang,Xinjun Chen,20150816,7
-Avanthi Reddy,Meiqi Liu,20150815,6
-Jiali Chen,Jiewen Mao,20150805,5
-Dian Wen,Xue Lin,20150827,7
-Abhishek Shukla,Bingyu Zhang,20150730,1
-Tejaswi Anantaraju,Mi Zhou,20150810,3
-Jing Zhuang,Camilo Cruz Amaluiza,20150823,7
-Gang Wu,Camilo Cruz Amaluiza,20150820,2
-Siyuan Li,Tian Zheng,20150728,7
-Haisheng Yuan,Bingyu Zhang,20150728,3
-Siyuan Li,Anjal Patni,20150804,4
-Kunal Sangwan,Kar Kei Chung,20150819,1
-Tian Zheng,Helen Du,20150802,6
-Aditi Silawat,Wei Dai,20150821,5
-Jiewen Mao,Kunal Sangwan,20150729,2
-Ankur Jain,Amey Jain,20150730,2
-Kunal Sangwan,Xinjun Chen,20150817,7
-Xudong Song,Jing Zhuang,20150827,6
-Chen Lu,Qianwen Li,20150802,3
-Jian Chen,Kar Kei Chung,20150815,6
-Jing Zhuang,Liqun Chen,20150804,4
-Gang Wu,Weifeng Cui,20150814,1
-Tejaswi Anantaraju,Kan Yang,20150804,1
-Shi Wang,Liqun Chen,20150813,2
-Jian Chen,Skandan Chockalingam,20150810,3
-Jianing Ni,Amey Jain,20150825,1
-Yi Ting Tsai,Bingyang Zhao,20150824,3
-Shi Wang,Jiewen Mao,20150731,3
-Zhou Su,Shi Wang,20150819,5
-Qiyue Ma,Qiyue Ma,20150731,6
-Kan Yang,Chang Liu,20150730,3
-Weifeng Cui,Meiqi Liu,20150810,7
-Liqun Chen,Camilo Cruz Amaluiza,20150819,3
-Bin He,Xintong Huang,20150826,5
-Ankur Jain,Kar Kei Chung,20150820,1
-Jike Li,Shi Wang,20150731,3
-Xuecong Shao,Dian Wen,20150803,2
-Avanthi Reddy,Monica Kushwah,20150821,2
-Dian Wen,Jialu Yuan,20150811,7
+Bingyang Zhao,Jing Zhuang,20150817,1
+Dian Wen,Gang Wu,20150825,5
+Jingyi Mei,Bingyang Zhao,20150824,3
+Chang Liu,Diwei Shi,20150815,6
+Jian Chen,Qianwen Li,20150731,1
+Yi Ting Tsai,Diwei Shi,20150730,7
+Qiuyu Long,Tian Zheng,20150808,3
+Ningxin Fan,Era Dwivedi,20150731,6
+Liqun Chen,Qianwen Li,20150825,4
+Jui-Pin Wang,Biqiu Li,20150809,5
+Xue Lin,Amey Jain,20150805,1
+Biqiu Li,Biqiu Li,20150807,3
+Mengqian Chu,Yangkelin Wei,20150731,6
+Yiren Zeng,Bin He,20150813,1
+Ahmad Nazhir,Siyuan Li,20150803,3
+Abhishek Shukla,Bingyu Zhang,20150812,5
+Bingyu Zhang,Chen Lu,20150827,5
+Mi Zhou,Bingyang Zhao,20150814,1
+Aditi Silawat,Anjal Patni,20150807,5
+Mi Zhou,Tejaswi Anantaraju,20150823,6
+Yiren Zeng,Yangkelin Wei,20150729,4
+Bin He,Xintong Huang,20150808,3
+Helen Du,Amey Jain,20150823,3
+Jui-Pin Wang,Camilo Cruz Amaluiza,20150804,3
+Xue Lin,Xu Zhao,20150810,2
+Gang Wu,HuaMing Lee,20150812,5
+Hanze Xu,Liang Tian,20150824,6
+Haigang Yang,Yiren Zeng,20150825,7
+Kan Yang,Jiewen Mao,20150814,2
+Kan Yang,Bingyu Zhang,20150824,3
+Wei Liu,Yifan Jia,20150808,5
+Qiuyu Long,Jiewen Mao,20150820,7
+Yiren Zeng,Mengqian Chu,20150731,5
+Yi Ting Tsai,Yiren Zeng,20150825,2
+Jing Zhuang,Biqiu Li,20150827,5
+Aayush Chandra,Diwei Shi,20150819,1
+Liang Tian,Weifeng Cui,20150821,1
+Jike Li,Qiyue Ma,20150815,1
+Kunal Sangwan,Jian Chen,20150825,4
+Ningxin Fan,Bingyu Zhang,20150820,6
+Weifeng Cui,Jui-Pin Wang,20150825,6
+Jingyi Mei,Huaju Yan,20150728,7
+Chang Liu,Jian Chen,20150823,4
+Camilo Cruz Amaluiza,Xudong Song,20150817,5
+Aayush Chandra,Jian Chen,20150728,6
+Jike Li,Jui-Pin Wang,20150808,5
+Yingyi Yang,Kar Kei Chung,20150730,2
+Haisheng Yuan,Gang Wu,20150825,3
+Huaju Yan,Bingyu Zhang,20150730,7
+Jhalak Goyal,Siyuan Li,20150802,3
