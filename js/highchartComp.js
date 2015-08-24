@@ -36,20 +36,20 @@ function neo4JChart(startDate,endDate){
   var mailJSON=[],chatJSON=[];
 
   if (startDate == null || endDate == null ) {
-    statementChart1 = statementChart1 + "match (a)-[r]-(b:employee) ";
+    statementChart1 = statementChart1 + "match (a)-[r]->(b:employee) ";
     statementChart1 = statementChart1 + "return r.timestamp as date,sum(toInt(r.frequency)) as mail ";
     statementChart1 = statementChart1 + "order by date";
 
-    statementChart2 = statementChart2 + "match (a)-[r]-(b:room) ";
+    statementChart2 = statementChart2 + "match (a)-[r]->(b:room) ";
     statementChart2 = statementChart2 + "return r.timestamp as date,sum(toInt(r.frequency)) as chat ";
     statementChart2 = statementChart2 + "order by date";
   } else {
-    statementChart1 = statementChart1 + "match (a)-[r]-(b:employee) ";
+    statementChart1 = statementChart1 + "match (a)-[r]->(b:employee) ";
     statementChart1 = statementChart1 + "where toInt(r.timestamp)>="+startDate+" and toInt(r.timestamp)<="+endDate+" ";
     statementChart1 = statementChart1 + "return r.timestamp as date,sum(toInt(r.frequency)) as mail ";
     statementChart1 = statementChart1 + "order by date";
 
-    statementChart2 = statementChart2 + "match (a)-[r]-(b:room) ";
+    statementChart2 = statementChart2 + "match (a)-[r]->(b:room) ";
     statementChart2 = statementChart2 + "where toInt(r.timestamp)>="+startDate+" and toInt(r.timestamp)<="+endDate+" ";
     statementChart2 = statementChart2 + "return r.timestamp as date,sum(toInt(r.frequency)) as chat ";
     statementChart2 = statementChart2 + "order by date";
