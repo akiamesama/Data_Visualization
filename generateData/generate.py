@@ -1,8 +1,8 @@
 import random
 import time
-numOfMail=60
+numOfMail=50
 teamChatNumber=50
-teamMailNumber=20
+teamMailNumber=15
 
 teamName=["AppDirect","BNYM", "Branding Brand","Capco", "Community Elf", "Connect With", "Legal Analytics", "Nebulus", "Nectr", "Neighborhood Allies", "PNC", "Raymond James", "XFactr"]
 from time import gmtime, strftime
@@ -41,7 +41,7 @@ def chatsInroom(team, formal):
         for i in range(teamChatNumber):
             member=team[random.randrange(len(team)-1)+1]
             timestamp=randomDate(onemonthago, today, random.random())
-            frequency =random.randrange(14)+1
+            frequency =random.randrange(20)+1
             totalCom[member][1]+=frequency
             name_fre[member]+=frequency
             
