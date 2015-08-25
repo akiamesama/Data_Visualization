@@ -32,11 +32,13 @@ function neo4JNetwork(startDate,endDate){
   var ecdPass = window.btoa(username+":"+password);
   var auth = "Basic "+ ecdPass
   var neo4Jurl = "http://52.20.59.19:7474/db/data/transaction/commit";
-  var statementNet;
+  var statementNet="";
   if (startDate == null || endDate == null ) {
     statementNet = "match path = (a:employee)-[r]-(b:employee) return path";
   } else {
-    statementNet = "match path = (a:employee)-[r]-(b:employee) where toInt(r.timestamp)>="+startDate+" and toInt(r.timestamp)<="+endDate+" return path";
+    statementNet = statementNet +"match path = (a:employee)-[r]-(b:employee) ";
+    statementNet = statementNet +"where toInt(r.timestamp)>="+startDate+" and toInt(r.timestamp)<="+endDate+" ";
+    statementNet = statementNet +"return path";
   } 
   
   var post_data_Net = {"statements":[{"statement":statementNet,"resultDataContents":["graph"]}]}
@@ -294,7 +296,12 @@ function drawNetwork(graph){
         		}
         	}
         	return graph.sizes[index]; });
-          var g = "Team "+(d.group+1);
+          if (isNaN(d.group)==true){
+            var g = "No Team";
+          } else {
+            var g = (d.group+1);
+          }
+          
           var txt = "<p> Name: "+d.name+"</p><p> Team: "+g+"</p><p> Email Amount: "+d.email+"</p><p> Chat Amount: "+d.chat+"</p>";
           $('#detail').html(txt);
           $('#detailName').html("Name: "+d.name);
