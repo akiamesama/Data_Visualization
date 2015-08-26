@@ -132,7 +132,7 @@ function drawChart(chartData){
               type: 'area'
           },
           title: {
-              text: 'Daily Amount of Email and Chat for eBusiness Consulting'
+              text: 'Daily Amount of Email and Chat for eBusiness Consultants'
           },
           xAxis: {
               categories: chartData.date,
