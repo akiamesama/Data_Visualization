@@ -43,7 +43,10 @@ function neo4JAFK(startDate,endDate){
   if (startDate == null || endDate == null ) {
     statementAFK = "match (a)-[r:MAIL_TO]-(b) return a.name,max(toInt(r.timestamp)) as max order by max";
   } else {
-    statementAFK = "match (a)-[r:MAIL_TO]-(b) where toInt(r.timestamp)>="+startDate+" and toInt(r.timestamp)<="+endDate+" return a.name,max(toInt(r.timestamp)) as max order by max";
+    statementAFK = "match (a)-[r:MAIL_TO]-(b) ";
+    statementAFK = statementAFK + "where toInt(r.timestamp)>="+startDate+" and toInt(r.timestamp)<="+endDate+" ";
+    statementAFK = statementAFK + "return a.name,max(toInt(r.timestamp)) as max ";
+    statementAFK = statementAFK + "order by max";
   } 
   
   var post_data_AFK = {"statements":[{"statement":statementAFK,"resultDataContents":["row"]}]}
@@ -76,13 +79,15 @@ function neo4JMailInac(startDate,endDate){
     statementMailInac = statementMailInac + "match (a:employee)-[r:MAIL_TO]-(b) ";
     statementMailInac = statementMailInac + "with a.name as name,avg(toInt(r.frequency)) as avg,max(toInt(r.timestamp)) as max ";
     statementMailInac = statementMailInac + "match (c:employee)-[s:MAIL_TO]-(d) where c.name=name and toInt(s.timestamp)=max ";
-    statementMailInac = statementMailInac + "return name,avg,sum(toInt(s.frequency)) as mnt";
+    statementMailInac = statementMailInac + "return name,avg,sum(toInt(s.frequency)) as mnt ";
+    statementMailInac = statementMailInac + "order by avg desc";
   } else {
     statementMailInac = statementMailInac + "match (a:employee)-[r:MAIL_TO]-(b) ";
     statementMailInac = statementMailInac + "where toInt(r.timestamp)>="+startDate+" and toInt(r.timestamp)<="+endDate+" ";
     statementMailInac = statementMailInac + "with a.name as name,avg(toInt(r.frequency)) as avg,max(toInt(r.timestamp)) as max ";
     statementMailInac = statementMailInac + "match (c:employee)-[s:MAIL_TO]-(d) where c.name=name and toInt(s.timestamp)=max ";
     statementMailInac = statementMailInac + "return name,avg,sum(toInt(s.frequency)) as mnt";
+    statementMailInac = statementMailInac + "order by avg desc";
   } 
   
   var post_data_MailInac = {"statements":[{"statement":statementMailInac,"resultDataContents":["row"]}]}
@@ -115,14 +120,16 @@ function neo4JChatInac(startDate,endDate){
     statementChatInac = statementChatInac + "match (a:employee)-[r:CHAT_IN]-(b) ";
     statementChatInac = statementChatInac + "with a.name as name,avg(toInt(r.frequency)) as avg,max(toInt(r.timestamp)) as max ";
     statementChatInac = statementChatInac + "match (c:employee)-[s:CHAT_IN]-(d) where c.name=name and toInt(s.timestamp)=max ";
-    statementChatInac = statementChatInac + "return name,avg,sum(toInt(s.frequency)) as mnt";
+    statementChatInac = statementChatInac + "return name,avg,sum(toInt(s.frequency)) as mnt ";
+    statementChatInac = statementChatInac + "order by avg desc";
   } else {
     statementChatInac = statementChatInac + "match (a:employee)-[r:CHAT_IN]-(b) ";
     statementChatInac = statementChatInac + "where toInt(r.timestamp)>="+startDate+" and toInt(r.timestamp)<="+endDate+" ";
     statementChatInac = statementChatInac + "with a.name as name,avg(toInt(r.frequency)) as avg,max(toInt(r.timestamp)) as max ";
     statementChatInac = statementChatInac + "match (c:employee)-[s:CHAT_IN]-(d) where c.name=name and toInt(s.timestamp)=max ";
-    statementChatInac = statementChatInac + "return name,avg,sum(toInt(s.frequency)) as mnt";
-  } 
+    statementChatInac = statementChatInac + "return name,avg,sum(toInt(s.frequency)) as mnt ";
+    statementChatInac = statementChatInac + "order by avg desc";
+  }  
   
   var post_data_ChatInac = {"statements":[{"statement":statementChatInac,"resultDataContents":["row"]}]}
 
@@ -169,10 +176,12 @@ function neo4J_visAFK(data){
       htmlText = htmlText + " >";
       classFlag = 0;
     }
-    htmlText = htmlText + "<td>"+rowCount+"</td>";
-    htmlText = htmlText + "<td>"+row.name+"</td>";
-    htmlText = htmlText + "<td>"+row.days+"</td>";
-    rowCount = rowCount + 1;
+    if (rowCount<=5){
+      htmlText = htmlText + "<td>"+rowCount+"</td>";
+      htmlText = htmlText + "<td>"+row.name+"</td>";
+      htmlText = htmlText + "<td>"+row.days+" days"+"</td>";
+      rowCount = rowCount + 1;
+    }
   });
 
   $('#abnAFK').html(htmlText);
@@ -198,12 +207,14 @@ function neo4J_visMailInac(data){
       htmlText = htmlText + " >";
       classFlag = 0;
     }
-    htmlText = htmlText + "<td>"+rowCount+"</td>";
-    htmlText = htmlText + "<td>"+row.name+"</td>";
-    numFormat = row.avg;
-    htmlText = htmlText + "<td>"+numFormat.toFixed(2)+"</td>";
-    htmlText = htmlText + "<td>"+row.days+"</td>";
-    rowCount = rowCount + 1;
+    if (rowCount<=5) {
+      htmlText = htmlText + "<td>"+rowCount+"</td>";
+      htmlText = htmlText + "<td>"+row.name+"</td>";
+      numFormat = row.avg;
+      htmlText = htmlText + "<td>"+numFormat.toFixed(2)+"</td>";
+      htmlText = htmlText + "<td>"+row.days+"</td>";
+      rowCount = rowCount + 1;
+    }    
   });
 
   $('#mailInac').html(htmlText);
@@ -230,12 +241,14 @@ function neo4J_visChatInac(data){
       htmlText = htmlText + " >";
       classFlag = 0;
     }
-    htmlText = htmlText + "<td>"+rowCount+"</td>";
-    htmlText = htmlText + "<td>"+row.name+"</td>";
-    numFormat = row.avg;
-    htmlText = htmlText + "<td>"+numFormat.toFixed(2)+"</td>";
-    htmlText = htmlText + "<td>"+row.days+"</td>";
-    rowCount = rowCount + 1;
+    if (rowCount<=5) {
+      htmlText = htmlText + "<td>"+rowCount+"</td>";
+      htmlText = htmlText + "<td>"+row.name+"</td>";
+      numFormat = row.avg;
+      htmlText = htmlText + "<td>"+numFormat.toFixed(2)+"</td>";
+      htmlText = htmlText + "<td>"+row.days+"</td>";
+      rowCount = rowCount + 1;
+    }
   });
 
   $('#chatInac').html(htmlText);

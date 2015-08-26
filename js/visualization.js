@@ -32,11 +32,13 @@ function neo4JNetwork(startDate,endDate){
   var ecdPass = window.btoa(username+":"+password);
   var auth = "Basic "+ ecdPass
   var neo4Jurl = "http://52.20.59.19:7474/db/data/transaction/commit";
-  var statementNet;
+  var statementNet="";
   if (startDate == null || endDate == null ) {
     statementNet = "match path = (a:employee)-[r]-(b:employee) return path";
   } else {
-    statementNet = "match path = (a:employee)-[r]-(b:employee) where toInt(r.timestamp)>="+startDate+" and toInt(r.timestamp)<="+endDate+" return path";
+    statementNet = statementNet +"match path = (a:employee)-[r]-(b:employee) ";
+    statementNet = statementNet +"where toInt(r.timestamp)>="+startDate+" and toInt(r.timestamp)<="+endDate+" ";
+    statementNet = statementNet +"return path";
   } 
   
   var post_data_Net = {"statements":[{"statement":statementNet,"resultDataContents":["graph"]}]}
@@ -97,7 +99,7 @@ function neo4J_visNetwork(data){
         row.graph.nodes.forEach(function (n) 
         {
           if (idIndex(nodes,n.id) == null)
-              nodes.push({id:parseInt(n.id),name:n.properties.name,group:parseInt(n.properties.group)
+              nodes.push({id:parseInt(n.id),name:n.properties.name,group:parseInt(n.properties.Group)
                           ,email:parseInt(n.properties.numOfEmails),chat:parseInt(n.properties.numOfChats)});
         });
         links = links.concat( row.graph.relationships.map(function(r) {
@@ -229,7 +231,7 @@ function drawNetwork(graph){
   $('#svgplugin').empty();
   $('#rightOne').hide();
   var width = 900,
-      height = 700;
+      height = 800;
 
   var color = d3.scale.category20();
 
@@ -237,9 +239,9 @@ function drawNetwork(graph){
       .charge(-500)
       .linkDistance(function(l){
         if(l.source.group == l.target.group) {
-          return 70;
+          return 50;
         } else {
-          return 240;
+          return 160;
         }
       })
       // .gravity(0.05)
@@ -294,7 +296,12 @@ function drawNetwork(graph){
         		}
         	}
         	return graph.sizes[index]; });
-          var g = "Team "+(d.group+1);
+          if (isNaN(d.group)==true){
+            var g = "No Team";
+          } else {
+            var g = (d.group+1);
+          }
+          
           var txt = "<p> Name: "+d.name+"</p><p> Team: "+g+"</p><p> Email Amount: "+d.email+"</p><p> Chat Amount: "+d.chat+"</p>";
           $('#detail').html(txt);
           $('#detailName').html("Name: "+d.name);
@@ -429,5 +436,46 @@ function drawNetwork(graph){
           toggle = 0;
       }
   }
+
+  var optArray = [];
+  for (var i = 0; i < graph.nodes.length - 1; i++) {
+      optArray.push(graph.nodes[i].name);
+  }
+  optArray = optArray.sort();
+  $(function () {
+      $("#chatInput").autocomplete({
+          source: optArray
+      });
+  });
+
+  var optArray = [];
+  for (var i = 0; i < graph.nodes.length - 1; i++) {
+      optArray.push(graph.nodes[i].name);
+  }
+  optArray = optArray.sort();
+  $(function () {
+      $("#emailInput").autocomplete({
+          source: optArray
+      });
+  });
+
+  $("#emailSearch").click(function searchNode() {
+      //find the node
+      var selectedVal = document.getElementById('emailInput').value;
+      var node = svg.selectAll(".node");
+      if (selectedVal == "none") {
+          node.style("stroke", "white").style("stroke-width", "1");
+      } else {
+          var selected = node.filter(function (d, i) {
+              return d.name != selectedVal;
+          });
+          selected.style("opacity", "0");
+          var link = svg.selectAll(".link")
+          link.style("opacity", "0");
+          d3.selectAll(".node, .link").transition()
+              .duration(5000)
+              .style("opacity", 1);
+      }
+  })
 
  }

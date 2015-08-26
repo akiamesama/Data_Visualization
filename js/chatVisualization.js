@@ -32,14 +32,19 @@ function neo4JChat(startDate,endDate){
   var ecdPass = window.btoa(username+":"+password);
   var auth = "Basic "+ ecdPass
   var neo4Jurl = "http://52.20.59.19:7474/db/data/transaction/commit";
-  var statementChat;
+  var statementChat="";
   if (startDate == null || endDate == null ) {
-    statementChat = "match (a:employee) return distinct a";
+    statementChat = statementChat +"match (a:employee)-[r:CHAT_IN]-(b:room) ";
+    statementChat = statementChat +"return distinct a.name,b.name,sum(toInt(r.frequency)),a.Group,a.numOfEmails ";
+    statementChat = statementChat +"order by b.name";
   } else {
-    statementChat = "match (a:employee)-[r]-(b:employee) where toInt(r.timestamp)>="+startDate+" and toInt(r.timestamp)<="+endDate+" return distinct a";
+    statementChat = statementChat +"match (a:employee)-[r:CHAT_IN]-(b:room) ";
+    statementChat = statementChat + "where toInt(r.timestamp)>="+startDate+" and toInt(r.timestamp)<="+endDate+" ";
+    statementChat = statementChat +"return distinct a.name,b.name,sum(toInt(r.frequency)),a.Group,a.numOfEmails ";
+    statementChat = statementChat +"order by b.name";
   } 
   
-  var post_data_chat = {"statements":[{"statement":statementChat,"resultDataContents":["graph"]}]}
+  var post_data_chat = {"statements":[{"statement":statementChat,"resultDataContents":["row"]}]}
 
   $.ajax({
       type:"POST",//headers: {"Authorization": auth},
@@ -63,7 +68,7 @@ function neo4JChatContacts(name){
   var ecdPass = window.btoa(username+":"+password);
   var auth = "Basic "+ ecdPass
   var neo4Jurl = "http://52.20.59.19:7474/db/data/transaction/commit";
-  var statementNet="match (a:employee)-[r]-(b:employee)where a.name='"+name+"' return b.name as name,sum(toInt(r.frequency))as mail_mnt order by mail_mnt desc limit 3";
+  var statementNet="match (a:employee)-[r:CHAT_IN]-(b:room) where a.name='"+name+"' return b.name as name,sum(toInt(r.frequency))as mail_mnt order by mail_mnt desc limit 3";
   
   var post_data_Net = {"statements":[{"statement":statementNet,"resultDataContents":["row"]}]}
 
@@ -90,34 +95,24 @@ function neo4JChatContacts(name){
 
 function neo4J_visChat(data){
     //Creating graph object
-    var outer=[],labels=[];
+    var outer=[],labels=[],cek;
     if (data.results[0] == null) {
       alert("we are terribly sorry for not finding the proper information, please click ok to return to initial information");
     } else {
       data.results[0].data.forEach(function (row) {
-        row.graph.nodes.forEach(function (n) 
-        {
-          n.labels.forEach(function (l){
-            test = $.inArray( l, labels )
-            if (test==-1) {
-              labels.push(l);
-            }
-          });             
-        });
+        cek = row.row[1];
+        test = $.inArray( cek, labels )
+        if (test==-1) {
+          labels.push(cek);
+        }
       });
       var inner1=[],inner2=[];
       labels.forEach(function (lab){      
         var name = lab;
         data.results[0].data.forEach(function (row) {
-          row.graph.nodes.forEach(function (n) 
-          {
-            n.labels.forEach(function (cek){
-              if (cek == name) {
-                inner2.push({name:n.properties.name,size:parseInt(n.properties[name]),group:parseInt(n.properties.group)
-                 ,email:parseInt(n.properties.numOfEmails)});
-              }
-            });
-          });
+          if (row.row[1] == name) {
+             inner2.push({name:row.row[0],size:parseInt([row.row[2]]),group:parseInt([row.row[3]]),email:parseInt([row.row[4]])});
+          }
         });
         inner1.push({name:name,children:inner2});
         inner2=[];
