@@ -41,10 +41,10 @@ function neo4JAFK(startDate,endDate){
   var statementAFK;
 
   if (startDate == null || endDate == null ) {
-    statementAFK = "match (a)-[r:MAIL_TO]-(b) return a.name,max(toInt(r.timestamp)) as max order by max";
+    statementAFK = "match (a)-[r]-(b) return a.name,max(toInt(r.timestamp)) as max order by max";
   } else {
-    statementAFK = "match (a)-[r:MAIL_TO]-(b) ";
-    statementAFK = statementAFK + "where toInt(r.timestamp)>="+startDate+" and toInt(r.timestamp)<="+endDate+" ";
+    statementAFK = "match (a)-[r]-(b) ";
+    //statementAFK = statementAFK + "where toInt(r.timestamp)>="+startDate+" and toInt(r.timestamp)<="+endDate+" ";
     statementAFK = statementAFK + "return a.name,max(toInt(r.timestamp)) as max ";
     statementAFK = statementAFK + "order by max";
   } 
