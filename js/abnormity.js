@@ -86,7 +86,7 @@ function neo4JMailInac(startDate,endDate){
     statementMailInac = statementMailInac + "where toInt(r.timestamp)>="+startDate+" and toInt(r.timestamp)<="+endDate+" ";
     statementMailInac = statementMailInac + "with a.name as name,avg(toInt(r.frequency)) as avg,max(toInt(r.timestamp)) as max ";
     statementMailInac = statementMailInac + "match (c:employee)-[s:MAIL_TO]-(d) where c.name=name and toInt(s.timestamp)=max ";
-    statementMailInac = statementMailInac + "return name,avg,sum(toInt(s.frequency)) as mnt";
+    statementMailInac = statementMailInac + "return name,avg,sum(toInt(s.frequency)) as mnt ";
     statementMailInac = statementMailInac + "order by avg desc";
   } 
   
