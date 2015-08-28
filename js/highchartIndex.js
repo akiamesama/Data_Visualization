@@ -45,7 +45,7 @@
                   pointPadding: 0.3,
                   pointPlacement: -0.2
               }, {
-                  name: 'Email Today',
+                  name: 'Latest Email Amount',
                   color: 'rgba(126,86,134,.9)',
                   data: [226, 70, 29, 37],
                   pointPadding: 0.4,
@@ -58,7 +58,7 @@
                   pointPlacement: 0.2,
                   yAxis: 1
               }, {
-                  name: 'Chats Today',
+                  name: 'Latest Chats Amount',
                   color: 'rgba(186,60,61,.9)',
                   data: [301, 102, 98, 102],
                   pointPadding: 0.4,
